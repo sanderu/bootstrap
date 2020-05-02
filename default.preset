@@ -1,0 +1,91 @@
+### Generic Debian ###
+UpdateDebian
+InstallRequired
+InstallShellTools               #RemoveShellTools
+#InstallKernelTools              #RemoveKernelTools
+InstallXserver                  #RemoveXserver
+InstallXscreensaver             #RemoveXscreensaver
+InstallAwesome                  #RemoveAwesome
+#InstallI3                       #RemoveI3
+
+### Database ###
+#InstallPostgreSQLServer        #RemovePostgreSQLServer
+#InstallPostgreSQLClient        #RemovePostgreSQLClient
+
+### Forensic tools ###
+#InstallForensicImageTools      #RemoveForensicImageTools
+#InstallFTKImager               #RemoveFTKImager
+#InstallImagingTools            #RemoveImagingTools
+#InstallExifTool                #RemoveExifTool
+#InstallRecoverTools            #RemoveRecoverTools
+#InstallPlaso                   #RemovePlaso
+#InstallAutopsy                 #RemoveAutopsy
+#InstallWindowsForensicTools    #RemoveWindowsForensicTools
+
+### Basic Tools and support ###
+InstallExfatSupport             #RemoveExfatSupport
+InstallPackagingTools           #RemovePackagingTools
+InstallBasicEditor              #RemoveBasicEditor
+InstallPythonTools              #RemovePythonTools
+InstallTerminator               #RemoveTerminator
+InstallLess                     #RemoveLess
+
+### Accessories ###
+#InstallKeepassX                #RemoveKeepassX
+InstallKeepassXC                #RemoveKeepassXC
+
+### Programming Tools ###
+#InstallAtomEditor              #RemoveAtomEditor
+#InstallAtomPlugins             #RemoveAtomPlugins
+#EnableAtomTelemetry            #DisableAtomTelemetry
+#InstallVisualStudioCode        #RemoveVisualStudioCode
+
+### Communication ###
+InstallChatProgs                #RemoveChatProgs
+#InstallEmailProgs              #RemoveEmailProgs
+
+### NetworkConfiguration ###
+#EnableMulticastDNS
+DisableMulticastDNS
+InstallNetworkTools             #RemoveNetworkTools
+InstallNetCommsTools            #RemoveNetCommsTools
+#InstallWindowsNetCommsTools    #RemoveWindowsNetCommsTools
+#InstallOpenconnectVPN          #RemoveOpenconnectVPN
+
+### Productivity Tools ###
+#InstallDia                     #RemoveDia
+#InstallWine                    #RemoveWine
+#InstallLibreOffice             #RemoveLibreOffice
+
+### Supporting scripts ###
+#InstallTecmintMonitorSh        #RemoveTecmintMonitorSh
+InstallMozExtensionMgr          #RemoveMozExtensionMgr
+
+### Web Browsers ###
+InstallChromium                 #RemoveChromium
+InstallFirefoxESR               #RemoveFirefoxESR
+SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
+#InstallFirefoxLatest            #RemoveFirefoxLatest
+
+### Multimedia ###
+#InstallSpotifyClient           #RemoveSpotifyClient
+#InstallVLCPlayer               #RemoveVLCPlayer
+#InstallAudaciousPlayer         #RemoveAudaciousPlayer
+#InstallClementinePlayer        #RemoveClementinePlayer
+#InstallPulseAudioEq            #RemovePulseAudioEq
+#InstallYouTubeDownloader       #RemoveYouTubeDownloader
+#InstallGIMP                    #RemoveGIMP
+#InstallHandBrake               #RemoveHandBrake
+
+### Miscellaneous tweaks and installs  ###
+#InstallQemuKVM                 #RemoveQemuKVM
+#InstallVMtoolsOnVM             #RemoveVMtoolsOnVM
+
+### 3rd party applications ###
+#InstallVMwareWorkstation       #RemoveVMwareWorkstation
+
+### Encryption Functions ###
+#AddExtraLUKSpasswords
+#EncryptUnpartitionedDisks
+#ReclaimEncryptDWUnmntPrt
+#RemoveKeyfileMounts
