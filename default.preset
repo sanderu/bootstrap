@@ -65,7 +65,9 @@ InstallMozExtensionMgr          #RemoveMozExtensionMgr
 InstallChromium                 #RemoveChromium
 InstallFirefoxESR               #RemoveFirefoxESR
 SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
-#InstallFirefoxLatest            #RemoveFirefoxLatest
+#InstallFirefoxLatest           #RemoveFirefoxLatest
+#InstallOpera                   #RemoveOpera
+#InstallVivaldi                 #RemoveVivaldi
 
 ### Multimedia ###
 #InstallSpotifyClient           #RemoveSpotifyClient

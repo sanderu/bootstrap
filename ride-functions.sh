@@ -714,6 +714,31 @@ RemoveFirefoxLatest() {
     rm -rf ${MYUSERDIR}/firefox
 }
 
+InstallOpera() {
+    echo 'deb https://deb.opera.com/opera-stable/ stable non-free' > /etc/apt/source.list.d/opera-stable.list
+    apt update
+    apt install -y opera-stable
+}
+
+RemoveOpera() {
+    apt remove -y opera-stable
+    rm /etc/apt/sources.list.d/opera-stable.list
+}
+
+InstallVivaldi() {
+    # Install prerequisites
+    apt install -y libappindicator3-1 libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7
+
+    echo 'deb http://repo.vivaldi.com/stable/deb/ stable main' > /etc/apt/sources.list.d/vivaldi.list
+    apt update
+    apt install -y vivaldi-stable
+}
+
+RemoveVivaldi() {
+    apt remove -y vivaldi-stable
+    rm /etc/apt/sources.list.d/vivaldi.list
+}
+
 ################################################################
 ###### Multimedia ###
 ################################################################
