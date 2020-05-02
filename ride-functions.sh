@@ -74,17 +74,6 @@ RemoveI3() {
 ### Database ###
 ############################
 
-# RHEL, CentOS, OracleLinux
-# dnf install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-# dnf -qy module disable postgresql - disable regular repo postgres-version  (only RHEL, CentOS, OracleLinux - not Fedora
-
-# Fedora
-# dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-31-x86_64/pgdg-fedora-repo-latest.noarch.rpm
-
-# dnf install postgresql11          - for client
-# dnf install postgresql11-server   - for server
-
-
 InstallPostgreSQLServer() {
     echo "deb http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
