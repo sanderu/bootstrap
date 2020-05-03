@@ -86,6 +86,11 @@ SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
 ### 3rd party applications ###
 #InstallVMwareWorkstation       #RemoveVMwareWorkstation
 
+### Security related ###
+#InstallAIDE                    #RemoveAIDE
+#InstallClamAV                  #RemoveClamAV
+#InstallLynis                   #RemoveLynis
+
 ### Encryption Functions ###
 #AddExtraLUKSpasswords
 #EncryptUnpartitionedDisks

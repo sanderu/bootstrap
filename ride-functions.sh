@@ -782,12 +782,10 @@ RemoveAudaciousPlayer() {
 }
 
 InstallClementinePlayer() {
-    # install clementine media player & pulseaudio equalizer
     apt install -y clementine gstreamer-plugins-bad
 }
 
 RemoveClementinePlayer() {
-    # install clementine media player & pulseaudio equalizer
     apt remove -y clementine gstreamer-plugins-bad
 }
 
@@ -910,6 +908,33 @@ InstallVMwareWorkstation() {
 
 RemoveVMwareWorkstation() {
     vmware-installer --uninstall-product=vmware-workstation
+}
+
+################################################################
+### Security related ###
+################################################################
+InstallAIDE() {
+    apt install -y aide
+}
+
+RemoveAIDE() {
+    apt remove -y aide
+}
+
+InstallClamAV() {
+    apt install -y clamav
+}
+
+RemoveClamAV() {
+    apt remove -y clamav
+}
+
+InstallLynis() {
+    apt install -y lynis
+}
+
+RemoveLynis() {
+    apt remove -y lynis
 }
 
 ################################################################
