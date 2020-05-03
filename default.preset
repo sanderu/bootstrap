@@ -51,6 +51,8 @@ InstallNetworkTools             #RemoveNetworkTools
 InstallNetCommsTools            #RemoveNetCommsTools
 #InstallWindowsNetCommsTools    #RemoveWindowsNetCommsTools
 #InstallOpenconnectVPN          #RemoveOpenconnectVPN
+#InstallSSHserver               #RemoveSSHserver
+InstallSSHclient                #RemoveSSHclient
 
 ### Productivity Tools ###
 #InstallDia                     #RemoveDia

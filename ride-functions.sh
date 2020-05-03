@@ -533,6 +533,22 @@ RemoveOpenconnectVPN() {
     apt remove -y openconnect
 }
 
+InstallSSHserver() {
+    apt install -y openssh-server
+}
+
+RemoveSSHserver() {
+    apt remove -y openssh-server
+}
+
+InstallSSHclient() {
+    apt install -y openssh-client
+}
+
+RemoveSSHclient() {
+    apt remove -y openssh-client
+}
+
 ################################################################
 ### Productivity Tools ###
 ################################################################
