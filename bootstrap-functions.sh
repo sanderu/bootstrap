@@ -3,12 +3,18 @@
 setupUserDefaultDirs() {
     # Create user's bin, git and Documents directories
     cd ${MYUSERDIR}
-    mkdir -p git > /dev/null
-    chown ${MYUSER}:${MYUSER} git
-    mkdir -p bin > /dev/null
-    chown ${MYUSER}:${MYUSER} bin
-    mkdir -p Documents > /dev/null
-    chown ${MYUSER}:${MYUSER} Documents
+    if [ ! -d git ]; then
+        mkdir -p git
+        chown ${MYUSER}:${MYUSER} git
+    fi
+    if [ ! -d bin ]; then
+        mkdir -p bin
+        chown ${MYUSER}:${MYUSER} bin
+    fi
+    if [ ! -d Documents ]; then
+        mkdir -p Documents
+        chown ${MYUSER}:${MYUSER} Documents
+    fi
 }
 
 setHostname() {
