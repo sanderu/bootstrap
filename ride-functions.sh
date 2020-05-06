@@ -86,7 +86,9 @@ RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
     apt remove -y postgresql-11
-    [ -f ${PGDG} ] && rm ${PGDG}
+    if [ -f ${PGDG} ]; then
+       rm ${PGDG}
+    fi
 }
 
 InstallPostgreSQLClient() {
@@ -101,7 +103,9 @@ RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
     apt remove -y postgresql-client-11
-    [ -f ${PGDG} ] && rm ${PGDG}
+    if [ -f ${PGDG} ]; then
+        rm ${PGDG}
+    fi
 }
 
 
