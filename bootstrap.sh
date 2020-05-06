@@ -23,6 +23,7 @@ DOWNLOADDIR='/tmp'
 HOSTNAME=$( hostname )
 RIDEFUNCTION_FILE=''
 PRESET_FILE=''
+OSRELEASENAME=''
 
 #### Main ####
 # Load functions needed for the bootstrapping

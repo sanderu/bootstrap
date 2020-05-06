@@ -49,16 +49,15 @@ logOutput() {
 getOSrelease() {
     if [ -f /etc/os-release ]; then
         OS=$( grep '^NAME="' /etc/os-release | awk -F '="' '{print $2}' | awk '{print $1}' | sed 's/"//g' )
-        OSRELEASEVERSION=$( grep 'VERSION_ID=' /etc-osrelease | awk -F '=' '{print $2}' | cut -f 2 -d '"')
         if [ x${OS} == x'Debian' ]; then
-            OSRELEASENAME=$( grep 'VERSION_CODENAME=' /etc-osrelease | awk -F '=' '{print $2}' )
+            OSRELEASENAME=$( grep 'VERSION_CODENAME=' /etc/os-release | awk -F '=' '{print $2}' )
         elif [ x${OS} == x'CentOS' ]; then
             OSRELEASENAME=$( awk -F 'VERSION_ID="' '{print $2}' /etc/os-release | cut -f 1 -d '"' )
         elif [ x${OS} == x'Fedora' ]; then
             OSRELEASENAME=$( awk -F 'VERSION_ID="' '{print $2}' /etc/os-release | cut -f 1 -d '"' )
         fi
     else
-        OSRELEASE='N/A'
+        OSRELEASENAME='N/A'
     fi
 }
 
