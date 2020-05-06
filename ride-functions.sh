@@ -15,8 +15,8 @@
 ################################################################
 
 UpdateDebian() {
-	apt update
-	apt upgrade
+    apt update
+    apt upgrade
 }
 
 InstallRequired() {
@@ -24,35 +24,35 @@ InstallRequired() {
 }
 
 InstallShellTools() {
-	apt install -y pv lsof strace
+    apt install -y pv lsof strace
 }
 
 RemoveShellTools() {
-	apt remove -y pv lsof strace
+    apt remove -y pv lsof strace
 }
 
 InstallKernelTools() {
-	apt install -y linux-headers-amd64
+    apt install -y linux-headers-amd64
 }
 
 RemoveKernelTools() {
-	apt remove -y linux-headers-amd64
+    apt remove -y linux-headers-amd64
 }
 
 InstallXserver() {
-	apt install -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    apt install -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
 }
 
 RemoveXserver() {
-	apt remove -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    apt remove -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
 }
 
 InstallXscreensaver() {
-	apt install -y xscreensaver xscreensaver-data xscreensaver-data-extra
+    apt install -y xscreensaver xscreensaver-data xscreensaver-data-extra
 }
 
 RemoveXscreensaver() {
-	apt remove -y xscreensaver xscreensaver-data xscreensaver-data-extra
+    apt remove -y xscreensaver xscreensaver-data xscreensaver-data-extra
 }
 
 InstallAwesome() {
@@ -79,13 +79,13 @@ InstallPostgreSQLServer() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-	apt install -y postgresql-11
+    apt install -y postgresql-11
 }
 
 RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-	apt remove -y postgresql-11
+    apt remove -y postgresql-11
     [ -f ${PGDG} ] && rm ${PGDG}
 }
 
@@ -94,13 +94,13 @@ InstallPostgreSQLClient() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-	apt install -y postgresql-client-11
+    apt install -y postgresql-client-11
 }
 
 RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-	apt remove -y postgresql-client-11
+    apt remove -y postgresql-client-11
     [ -f ${PGDG} ] && rm ${PGDG}
 }
 
@@ -199,7 +199,7 @@ InstallAutopsy() {
     # We cannot import Brian Carriers GPG key - so unable to do signature verification
     #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
     #gpg: data source: https://keys.openpgp.org:443
-    #(1)	  1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
+    #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
     #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".  Enter number(s), N)ext, or Q)uit > n
     #LATESTAUTOPSYSIGNATURE="${LATESTAUTOPSY}.asc"
     #LATESTVERIFIEDSIGNATURE=$(grep "GPG key" ${TMP_GITHUB_AUTOPSY} |sort -r -V | awk 'NR==1' | awk -F '>' '{print $3}' | cut -f1 -d'<')
@@ -211,7 +211,7 @@ InstallAutopsy() {
     dpkg -i ${DOWNLOADDIR}/${SLEUTH_JAVA}
 
     # Install Autopsy:
-  	AUTOPSYINSTALLER="basename ${LATEST_AUTOPSY}"
+      AUTOPSYINSTALLER="basename ${LATEST_AUTOPSY}"
     wget --quiet --show-progress ${LATEST_AUTOPSY} -O ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
     #wget --quiet ${LATESTAUTOPSYSIGNATURE}
 
@@ -434,13 +434,13 @@ EnableAtomTelemetry(){
 }
 
 InstallVisualStudioCode() {
-	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-	chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
-	echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+    chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
 
-	#Then update the package cache and install the package using:
-	apt update
-	apt install -y code # or code-insiders
+    #Then update the package cache and install the package using:
+    apt update
+    apt install -y code # or code-insiders
 }
 
 RemoveVisualStudioCode() {
@@ -461,11 +461,11 @@ RemoveChatProgs() {
 }
 
 InstallEmailProgs() {
-	apt install -y mutt ssmtp mairix
+    apt install -y mutt ssmtp mairix
 }
 
 RemoveEmailProgs() {
-	apt remove -y mutt ssmtp mairix
+    apt remove -y mutt ssmtp mairix
 }
 
 ################################################################
@@ -473,56 +473,56 @@ RemoveEmailProgs() {
 ################################################################
 
 EnableMulticastDNS() {
-  	# change /etc/nsswitch.conf file back to default to mulicast dns
-  	# Original #hosts line will be enabled and current hosts line will be disabled
+    # change /etc/nsswitch.conf file back to default to mulicast dns
+    # Original #hosts line will be enabled and current hosts line will be disabled
 
-  	NSSWITCHFILE=/etc/nsswitch.conf
+    NSSWITCHFILE=/etc/nsswitch.conf
 
-  	OLDDNSLINE=$( cat ${NSSWITCHFILE} | grep -in '^#hosts' )
+    OLDDNSLINE=$( cat ${NSSWITCHFILE} | grep -in '^#hosts' )
 
-  	if [ ! -z $OLDDNSLINE ] ; then # the old DNS line exists and can be reactivated
-    	DNSLINENO=$( cat ${NSSWITCHFILE} | grep -in ^hosts | cut -c1-2 )
-    	sed -i ${DNSLINENO}'d' ${NSSWITCHFILE}
-    	sed -i 's/^#hosts/hosts/g' ${NSSWITCHFILE}
-  	fi
+    if [ ! -z $OLDDNSLINE ] ; then # the old DNS line exists and can be reactivated
+        DNSLINENO=$( cat ${NSSWITCHFILE} | grep -in ^hosts | cut -c1-2 )
+        sed -i ${DNSLINENO}'d' ${NSSWITCHFILE}
+        sed -i 's/^#hosts/hosts/g' ${NSSWITCHFILE}
+    fi
 }
 
 DisableMulticastDNS() {
-  	# change /etc/nsswitch.conf file to disable mulicast dns and use dns first
-  	# Original line will be left in the file with a # in the beginning of the line
- 	# multicast dns has to be disabled to resolve .local dns names (like in Active Directory domains called eg. contoso.local)
-  	NSSWITCHFILE=/etc/nsswitch.conf
-  	DNSLINENO=$( cat ${NSSWITCHFILE} | grep -in ^hosts | cut -c1-2 )
-  	NEWLINENO=$((${DNSLINENO}))
+    # change /etc/nsswitch.conf file to disable mulicast dns and use dns first
+    # Original line will be left in the file with a # in the beginning of the line
+    # multicast dns has to be disabled to resolve .local dns names (like in Active Directory domains called eg. contoso.local)
+    NSSWITCHFILE=/etc/nsswitch.conf
+    DNSLINENO=$( cat ${NSSWITCHFILE} | grep -in ^hosts | cut -c1-2 )
+    NEWLINENO=$((${DNSLINENO}))
 
-  	NOMULTIDNSLINE=$( cat ${NSSWITCHFILE} | grep -i ^hosts | sed 's/mdns4_minimal //g' | sed 's/dns //g' | sed 's/files/files dns/g' )
+    NOMULTIDNSLINE=$( cat ${NSSWITCHFILE} | grep -i ^hosts | sed 's/mdns4_minimal //g' | sed 's/dns //g' | sed 's/files/files dns/g' )
 
-  	sed -i 's/^hosts/#hosts/g' ${NSSWITCHFILE}
-  	sed -i "${NEWLINENO} a ${NOMULTIDNSLINE}" ${NSSWITCHFILE} # Discard Multicast DNS
+    sed -i 's/^hosts/#hosts/g' ${NSSWITCHFILE}
+    sed -i "${NEWLINENO} a ${NOMULTIDNSLINE}" ${NSSWITCHFILE} # Discard Multicast DNS
 }
 
 InstallNetworkTools() {
-  	apt install -y tcpdump wireshark nmap macchanger flow-tools
+    apt install -y tcpdump wireshark nmap macchanger flow-tools
 }
 
 RemoveNetworkTools() {
-  	apt remove -y tcpdump wireshark nmap macchanger flow-tools
+    apt remove -y tcpdump wireshark nmap macchanger flow-tools
 }
 
 InstallNetCommsTools() {
-  	apt install -y minicom socat
+    apt install -y minicom socat
 }
 
 RemoveNetCommsTools() {
-  	apt remove -y minicom socat
+    apt remove -y minicom socat
 }
 
 InstallWindowsNetCommsTools() {
-  	apt install -y putty remmina
+    apt install -y putty remmina
 }
 
 RemoveWindowsNetCommsTools() {
-  	apt remove -y putty remmina
+    apt remove -y putty remmina
 }
 
 InstallOpenconnectVPN() {
@@ -554,27 +554,27 @@ RemoveSSHclient() {
 ################################################################
 
 InstallDia() {
-  	apt install -y dia
+      apt install -y dia
 }
 
 RemoveDia() {
-  	apt remove -y dia
+      apt remove -y dia
 }
 
 InstallWine() {
-  	apt install -y wine
+      apt install -y wine
 }
 
 RemoveWine() {
-  	apt remove -y wine
+      apt remove -y wine
 }
 
 InstallLibreOffice() {
-  	apt install -y libreoffice
+      apt install -y libreoffice
 }
 
 RemoveLibreOffice() {
-  	apt remove -y libreoffice
+      apt remove -y libreoffice
 }
 
 
@@ -972,42 +972,42 @@ AddExtraLUKSpasswords() {
 }
 
 EncryptUnpartitionedDisks() {
-  	# Reclaim and encrypt disks without partitions (that are not already encrypted using LUKS)
-  	# BE AWARE that using this function might lead to dataloss - especially if you are using third party encrypting tools.
-  	# Use this function carefully and understand what is it doing before ativating it.
+    # Reclaim and encrypt disks without partitions (that are not already encrypted using LUKS)
+    # BE AWARE that using this function might lead to dataloss - especially if you are using third party encrypting tools.
+    # Use this function carefully and understand what is it doing before ativating it.
 
-  	MOUNTBASE=/mnt
+    MOUNTBASE=/mnt
 
-  	DISKS=$( lsblk -l | grep disk | awk '{print $1}' ) #sda, sdb
-  	UNPARTEDDISKS=()
+    DISKS=$( lsblk -l | grep disk | awk '{print $1}' ) #sda, sdb
+    UNPARTEDDISKS=()
 
-  	# Check for upartitioned disks & put in array
-  	for DISK in ${DISKS} ; do
-    	DISKDEVICE="/dev/${DISK}"
-    	PARTITIONS=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' )
-    	#Check if DISKDEVICE has 0 partitions and is not a LUKS device itself
-    	if [[ -z ${PARTITIONS} ]] ; then
-      		cryptsetup isLuks ${DISKDEVICE} || UNPARTEDDISKS+=(${DISKDEVICE})
-    	fi
-  	done
+    # Check for upartitioned disks & put in array
+    for DISK in ${DISKS} ; do
+        DISKDEVICE="/dev/${DISK}"
+        PARTITIONS=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' )
+        #Check if DISKDEVICE has 0 partitions and is not a LUKS device itself
+        if [[ -z ${PARTITIONS} ]] ; then
+              cryptsetup isLuks ${DISKDEVICE} || UNPARTEDDISKS+=(${DISKDEVICE})
+        fi
+    done
 
-  	for DISKDEVICE in ${UNPARTEDDISKS} ; do
+    for DISKDEVICE in ${UNPARTEDDISKS} ; do
 
-    	read -r -p "${1:-You are about to remove ALL DATA on $DISKDEVICE. Do you want to proceed?  [y/n]} " -n 1  RESPONSE
-    	if [[ ! ${RESPONSE} =~ ^[Yy]$ ]] ; then # if NOT yes then exit
-      		[[ "$0" = "${BASH_SOURCE}" ]] && exit 1 || return 1 # exit from shell or function but not interactive shell
-    	fi
+        read -r -p "${1:-You are about to remove ALL DATA on $DISKDEVICE. Do you want to proceed?  [y/n]} " -n 1  RESPONSE
+        if [[ ! ${RESPONSE} =~ ^[Yy]$ ]] ; then # if NOT yes then exit
+            [[ "$0" = "${BASH_SOURCE}" ]] && exit 1 || return 1 # exit from shell or function but not interactive shell
+        fi
 
-    	echo "Removing partition table on ${DISKDEVICE} and creating new partition"
+        echo "Removing partition table on ${DISKDEVICE} and creating new partition"
 
 
-		# to create the partitions programatically (rather than manually)
-		# we're going to simulate the manual input to fdisk
-		# The sed script strips off all the comments so that we can
-		# document what we're doing in-line with the actual commands
-		# Note that a blank line (commented as "default" will send a empty
-		# line terminated with a newline to take the fdisk default.
-		sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISKDEVICE}
+        # to create the partitions programatically (rather than manually)
+        # we're going to simulate the manual input to fdisk
+        # The sed script strips off all the comments so that we can
+        # document what we're doing in-line with the actual commands
+        # Note that a blank line (commented as "default" will send a empty
+        # line terminated with a newline to take the fdisk default.
+        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISKDEVICE}
   g # Create a new GPT partition table
   n # new partition
   1 # partition number 1
@@ -1017,57 +1017,57 @@ EncryptUnpartitionedDisks() {
   w # write the partition table
 EOF
 
-    	NEWPARTITION=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' | awk '{print $1}' )
-    	echo "About to encrypted content of ${NEWPARTITION}"
-    	cryptsetup -y -v luksFormat ${NEWPARTITION}
-    	cryptsetup isLuks ${DISKDEVICE} && echo "Encryption of ${DISKDEVICE} was a success"
-    	HDDUUID=$( cryptsetup luksUUID ${NEWPARTITION} )
-    	LUKSNAME="luks-${HDDUUID}"
-    	DEVICENAME=${NEWPARTITION##*/}
+        NEWPARTITION=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' | awk '{print $1}' )
+        echo "About to encrypted content of ${NEWPARTITION}"
+        cryptsetup -y -v luksFormat ${NEWPARTITION}
+        cryptsetup isLuks ${DISKDEVICE} && echo "Encryption of ${DISKDEVICE} was a success"
+        HDDUUID=$( cryptsetup luksUUID ${NEWPARTITION} )
+        LUKSNAME="luks-${HDDUUID}"
+        DEVICENAME=${NEWPARTITION##*/}
 
-    	echo 'Opening encrypted device and creating ext4 filesystem'
-    	cryptsetup luksOpen ${NEWPARTITION} ${LUKSNAME}
-    	mkfs.ext4 /dev/mapper/${LUKSNAME}
-    	MOUNTPOINT=${MOUNTBASE}/${HDDUUID}
-    	mkdir -p ${MOUNTPOINT}
-    	mount /dev/mapper/${LUKSNAME} ${MOUNTPOINT}
-    	chmod 755 ${MOUNTPOINT}
-    	chown ${MYUSER}:${MYUSER} ${MOUNTPOINT}
+        echo 'Opening encrypted device and creating ext4 filesystem'
+        cryptsetup luksOpen ${NEWPARTITION} ${LUKSNAME}
+        mkfs.ext4 /dev/mapper/${LUKSNAME}
+        MOUNTPOINT=${MOUNTBASE}/${HDDUUID}
+        mkdir -p ${MOUNTPOINT}
+        mount /dev/mapper/${LUKSNAME} ${MOUNTPOINT}
+        chmod 755 ${MOUNTPOINT}
+        chown ${MYUSER}:${MYUSER} ${MOUNTPOINT}
 
-    	# rotate keyfile
-    	KEYFILE=/root/keyfile_${HDDUUID}
-    	if [ -f ${KEYFILE} ] ; then
-      		i=1
-      		NEWKEYFILE=${KEYFILE}.${i}
-      		while [ -f ${NEWKEYFILE} ]; do
-        		i=$(( ${i} + 1 ))
-        		NEWKEYFILE="${KEYFILE}.${i}"
-      		done
-      		mv ${KEYFILE} ${NEWKEYFILE}
-    	fi
+        # rotate keyfile
+        KEYFILE=/root/keyfile_${HDDUUID}
+        if [ -f ${KEYFILE} ] ; then
+            i=1
+            NEWKEYFILE=${KEYFILE}.${i}
+            while [ -f ${NEWKEYFILE} ]; do
+                i=$(( ${i} + 1 ))
+                NEWKEYFILE="${KEYFILE}.${i}"
+            done
+            mv ${KEYFILE} ${NEWKEYFILE}
+        fi
 
-    	# Generate key file for LUKS encryption
-    	dd if=/dev/urandom of=${KEYFILE} bs=1024 count=4
-    	chmod 0400 ${KEYFILE}
-    	echo "Adding a keyfile for ${DEVICENAME} for automount configuration on ${MOUNTPOINT}"
-    	cryptsetup -v luksAddKey ${NEWPARTITION} ${KEYFILE}
+        # Generate key file for LUKS encryption
+        dd if=/dev/urandom of=${KEYFILE} bs=1024 count=4
+        chmod 0400 ${KEYFILE}
+        echo "Adding a keyfile for ${DEVICENAME} for automount configuration on ${MOUNTPOINT}"
+        cryptsetup -v luksAddKey ${NEWPARTITION} ${KEYFILE}
 
-    	#Update /etc/crypttab
-    	echo 'Updating /etc/crypttab'
-    	echo "${LUKSNAME} UUID=${HDDUUID} /root/keyfile_${HDDUUID}" >> /etc/crypttab
+        #Update /etc/crypttab
+        echo 'Updating /etc/crypttab'
+        echo "${LUKSNAME} UUID=${HDDUUID} /root/keyfile_${HDDUUID}" >> /etc/crypttab
 
-    	#Update /etc/fstab
-    	echo 'Updating /etc/fstab'
-    	echo "/dev/mapper/${LUKSNAME}   ${MOUNTPOINT}   ext4   defaults  0  2" >> /etc/fstab
+        #Update /etc/fstab
+        echo 'Updating /etc/fstab'
+        echo "/dev/mapper/${LUKSNAME}   ${MOUNTPOINT}   ext4   defaults  0  2" >> /etc/fstab
 
-  	done
+    done
 
 }
 
 ReclaimEncryptDWUnmntPrt() {
-  	# Reclaim and encrypt disks with unmounted partitions
-  	# This function will reclaim disks with unmounted partitions - encrypted or not
-  	# BE AWARE! Using this function could make you loose data permanently
+    # Reclaim and encrypt disks with unmounted partitions
+    # This function will reclaim disks with unmounted partitions - encrypted or not
+    # BE AWARE! Using this function could make you loose data permanently
 
     MOUNTBASE=/mnt
 
@@ -1075,32 +1075,32 @@ ReclaimEncryptDWUnmntPrt() {
     NOTMOUNTED=$( blkid -o list | grep 'not mounted' | cut -d ' ' -f1 | sed '/^$/d' )
 
     if [ ! -z ${#NOTMOUNTED} ] ; then # some partitions are unmounted
-      # Check for encrypted partitions & put in array
+        # Check for encrypted partitions & put in array
 
-      	for DISK in ${DISKS} ; do
-          	DISKDEVICE="/dev/${DISK}"
-          	NUMBEROFDEVICES=$( ls ${DISKDEVICE}? 2>/dev/null )
-          	NUMBEROFUNMOUNTED=$( blkid -o list | grep 'not mounted' | cut -d ' ' -f1 | sed '/^$/d' | grep ${DISKDEVICE} )
-          	#PARTITIONS=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' )
+        for DISK in ${DISKS} ; do
+            DISKDEVICE="/dev/${DISK}"
+            NUMBEROFDEVICES=$( ls ${DISKDEVICE}? 2>/dev/null )
+            NUMBEROFUNMOUNTED=$( blkid -o list | grep 'not mounted' | cut -d ' ' -f1 | sed '/^$/d' | grep ${DISKDEVICE} )
+            #PARTITIONS=$( /sbin/sfdisk -d ${DISKDEVICE} 2>&1 | grep '^/' )
 
-          	#Check if DISKDEVICE has 0 partitions and is not a LUKS device itself
-          	if [ ${#NUMBEROFDEVICES} == ${#NUMBEROFUNMOUNTED} ] ; then
-            	echo "No mounted partitions found on ${DISKDEVICE}"
+            #Check if DISKDEVICE has 0 partitions and is not a LUKS device itself
+            if [ ${#NUMBEROFDEVICES} == ${#NUMBEROFUNMOUNTED} ] ; then
+                echo "No mounted partitions found on ${DISKDEVICE}"
 
-            	read -r -p "${1:-You are about to remove ALL DATA on ${DISKDEVICE}. Do you want to proceed?  [y/n]} " -n 1  RESPONSE
-            	if [[ ! ${RESPONSE} =~ ^[Yy]$ ]] ; then # if NOT yes then exit
-              		[[ "$0" = "${BASH_SOURCE}" ]] && exit 1 || return 1 # exit from shell or function but not interactive shell
-            	fi
+                read -r -p "${1:-You are about to remove ALL DATA on ${DISKDEVICE}. Do you want to proceed?  [y/n]} " -n 1  RESPONSE
+                if [[ ! ${RESPONSE} =~ ^[Yy]$ ]] ; then # if NOT yes then exit
+                      [[ "$0" = "${BASH_SOURCE}" ]] && exit 1 || return 1 # exit from shell or function but not interactive shell
+                fi
 
-            	echo 'Cleaning and encrypting disk'
+                echo 'Cleaning and encrypting disk'
 
-            	# to create the partitions programatically (rather than manually)
-            	# we're going to simulate the manual input to fdisk
-            	# The sed script strips off all the comments so that we can
-            	# document what we're doing in-line with the actual commands
-            	# Note that a blank line (commented as "default" will send a empty
-            	# line terminated with a newline to take the fdisk default.
-				sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISKDEVICE}
+                # to create the partitions programatically (rather than manually)
+                # we're going to simulate the manual input to fdisk
+                # The sed script strips off all the comments so that we can
+                # document what we're doing in-line with the actual commands
+                # Note that a blank line (commented as "default" will send a empty
+                # line terminated with a newline to take the fdisk default.
+                sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISKDEVICE}
   g # Create a new GPT partition table
   n # new partition
   1 # partition number 1
@@ -1130,13 +1130,13 @@ EOF
                 # rotate keyfile
                 KEYFILE=/root/keyfile_${HDDUUID}
                 if [ -f ${KEYFILE} ] ; then
-                  	i=1
-                  	NEWKEYFILE=${KEYFILE}.${i}
-                  	while [ -f ${NEWKEYFILE} ]; do
-                    	i=$(( ${i} + 1 ))
-                    	NEWKEYFILE="${KEYFILE}.${i}"
-                  	done
-                  	mv ${KEYFILE} ${NEWKEYFILE}
+                      i=1
+                      NEWKEYFILE=${KEYFILE}.${i}
+                      while [ -f ${NEWKEYFILE} ]; do
+                        i=$(( ${i} + 1 ))
+                        NEWKEYFILE="${KEYFILE}.${i}"
+                      done
+                      mv ${KEYFILE} ${NEWKEYFILE}
                 fi
 
                 # Generate key file for LUKS encryption
@@ -1152,7 +1152,7 @@ EOF
                 #Update /etc/fstab
                 echo 'Updating /etc/fstab'
                 echo "/dev/mapper/${LUKSNAME}   ${MOUNTPOINT}   ext4   defaults  0  2" >> /etc/fstab
-          	fi
+            fi
         done
     fi
 }
