@@ -703,9 +703,15 @@ UnsetFirefoxESRPreferences() {
     FIREFOXPREFFILE=${FIREFOXINSTALLDIR}'mozilla.cfg'
     FIREFOXAUTOCONFIG=${FIREFOXINSTALLDIR}'defaults/pref/autoconfig.js'
     FIREFOXOVERRIDEFILE=${FIREFOXINSTALLDIR}'browser/override.ini'
-    rm ${FIREFOXPREFFILE}
-    rm ${FIREFOXAUTOCONFIG}
-    rm ${FIREFOXOVERRIDEFILE}
+    if [ -f ${FIREFOXPREFFILE} ]; then
+        rm ${FIREFOXPREFFILE}
+    fi
+    if [ -f ${FIREFOXAUTOCONFIG} ]; then
+        rm ${FIREFOXAUTOCONFIG}
+    fi
+    if [ -f ${FIREFOXOVERRIDEFILE} ]; then
+        rm ${FIREFOXOVERRIDEFILE}
+    fi
 }
 
 # Firefox Quantum:
@@ -731,7 +737,9 @@ InstallFirefoxLatest() {
 }
 
 RemoveFirefoxLatest() {
-    rm -rf ${MYUSERDIR}/firefox
+    if [ -f ${MYUSERDIR}/firefox ]; then
+        rm -rf ${MYUSERDIR}/firefox
+    fi
 }
 
 InstallOpera() {
@@ -743,7 +751,9 @@ InstallOpera() {
 
 RemoveOpera() {
     apt remove -y opera-stable
-    rm /etc/apt/sources.list.d/opera-stable.list
+    if [ -f /etc/apt/sources.list.d/opera-stable.list ]; then
+        rm /etc/apt/sources.list.d/opera-stable.list
+    fi
 }
 
 InstallVivaldi() {
@@ -758,7 +768,9 @@ InstallVivaldi() {
 
 RemoveVivaldi() {
     apt remove -y vivaldi-stable
-    rm /etc/apt/sources.list.d/vivaldi.list
+    if [ -f /etc/apt/sources.list.d/vivaldi.list ]; then
+        rm /etc/apt/sources.list.d/vivaldi.list
+    fi
 }
 
 ################################################################
@@ -777,9 +789,13 @@ InstallSpotifyClient() {
 RemoveSpotifyClient() {
     # remove Spotify client
     SPOTIFYREPO=/etc/apt/sources.list.d/spotify.list
-    rm ${SPOTIFYREPO}
+    if [ -f ${SPOTIFYREPO} ]; then
+        rm ${SPOTIFYREPO}
+    fi
     APTKEY=$( apt-key list --fingerprint spotify.com | grep -A1 pub | tail -n1 | awk '{print $(NF-1)$(NF)}' )
-    apt-key del ${APTKEY}
+    if [ ! -z ${APTKEY} ]; then
+        apt-key del ${APTKEY}
+    fi
     apt remove -y spotify-client
 }
 
@@ -1134,13 +1150,13 @@ EOF
                 # rotate keyfile
                 KEYFILE=/root/keyfile_${HDDUUID}
                 if [ -f ${KEYFILE} ] ; then
-                      i=1
-                      NEWKEYFILE=${KEYFILE}.${i}
-                      while [ -f ${NEWKEYFILE} ]; do
+                    i=1
+                    NEWKEYFILE=${KEYFILE}.${i}
+                    while [ -f ${NEWKEYFILE} ]; do
                         i=$(( ${i} + 1 ))
                         NEWKEYFILE="${KEYFILE}.${i}"
-                      done
-                      mv ${KEYFILE} ${NEWKEYFILE}
+                    done
+                    mv ${KEYFILE} ${NEWKEYFILE}
                 fi
 
                 # Generate key file for LUKS encryption
