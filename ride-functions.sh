@@ -223,11 +223,10 @@ InstallAutopsy() {
     AUTOPSYSUBDIR=$( unzip -l ${DOWNLOADDIR}/${AUTOPSYINSTALLER} | awk 'NR==5' | awk '{print $4}' | cut -f 1 -d '/' )
     unzip ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
     chown -R ${MYUSER}:${MYUSER} ${AUTOPSYSUBDIR}/
-    cd ${AUTOPSYSUBDIR}
-    chmod +x unix_setup.sh
+    chmod +x ${AUTOPSYSUBDIR}/unix_setup.sh
     if [ -d /usr/lib/jvm/bellsoft-java8-full-amd64 ]; then
-        sed -i "/^TSK_VERSION=.*$/a JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64" unix_setup.sh
-        su - ${MYUSER} sh -c './unix_setup.sh'
+        sed -i "/^TSK_VERSION=.*$/a JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64" ${AUTOPSYSUBDIR}/unix_setup.sh
+        su - ${MYUSER} sh -c "cd ${AUTOPSYSUBDIR} && ./unix_setup.sh"
     else
         echo 'Something has gone wrong - the bellsoft-java8-full package has not been installed correctly.'
     fi
