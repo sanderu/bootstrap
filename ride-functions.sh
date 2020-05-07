@@ -220,10 +220,10 @@ InstallAutopsy() {
     #wget --quiet ${LATESTAUTOPSYSIGNATURE}
 
     cd ${MYUSERDIR}
-    AUTOPSYSUBDIR=$( unzip -l AUTOPSYINSTALLER | awk 'NR==5' | awk '{print $4}' )
-    unzip ${AUTOPSYINSTALLER}
+    AUTOPSYSUBDIR=$( unzip -l ${DOWNLOADDIR}/${AUTOPSYINSTALLER} | awk 'NR==5' | awk '{print $4}' | cut -f 1 -d '/' )
+    unzip ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
     chown -R ${MYUSER}:${MYUSER} ${AUTOPSYSUBDIR}/
-    cd $AUTOPSYSUBDIR
+    cd ${AUTOPSYSUBDIR}
     chmod +x unix_setup.sh
     if [ -d /usr/lib/jvm/bellsoft-java8-full-amd64 ]; then
         sed -i "/^TSK_VERSION=.*$/a JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64" unix_setup.sh
