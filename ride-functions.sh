@@ -177,13 +177,13 @@ RemovePlaso() {
 
 InstallAutopsy() {
     # Prerequisite for Autopsy
-    apt install -y testdisk libpq5 libvhdi1 libvmdk1 libewf-dev libafflib-dev libsqlite3-dev libc3p0-java libpostgresql-jdbc-java libvmdk-dev libvhdi-dev libbfio1 libbfio-dev
+    apt install -y testdisk libpq5 libvhdi1 libvmdk1 libewf-dev libafflib-dev libsqlite3-dev libc3p0-java libpostgresql-jdbc-java libvmdk-dev libvhdi-dev libbfio1 libbfio-dev unzip
 
     # Install BellSoft Java 8
     wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
     echo 'deb [arch=amd64] https://apt.bell-sw.com/ stable main' | tee /etc/apt/sources.list.d/bellsoft.list
     apt update
-    apt install bellsoft-java8-full
+    apt install -y bellsoft-java8-full
 
     # Set JAVA_HOME
     #NOTE: You may need to log out and back in again after setting JAVA_HOME before the Autopsy
@@ -215,7 +215,7 @@ InstallAutopsy() {
     dpkg -i ${DOWNLOADDIR}/${SLEUTH_JAVA}
 
     # Install Autopsy:
-      AUTOPSYINSTALLER="basename ${LATEST_AUTOPSY}"
+    AUTOPSYINSTALLER="$( basename ${LATEST_AUTOPSY} )"
     wget --quiet --show-progress ${LATEST_AUTOPSY} -O ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
     #wget --quiet ${LATESTAUTOPSYSIGNATURE}
 
