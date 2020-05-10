@@ -25,7 +25,7 @@ Outcomment what is not wanted.
 
 
 ## Usage
-sudo bash bootstrap [-f <ride-functions filename>] [-p <preset filename>] [-l <ride-functions filename>] [-c] [-n]
+sudo bash bootstrap.sh [-f \<ride-functions filename>] [-p \<preset filename>] [-l \<ride-functions filename>] [-c] [-n]
 
     -f ride-functions filename  - file with functions available
     -p preset filename          - file with wishes for actions to be performed
