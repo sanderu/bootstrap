@@ -30,9 +30,9 @@ $ sudo bash bootstrap.sh [-f \<ride-functions filename>] [-p \<preset filename>]
     -f ride-functions filename  - file with functions available
     -p preset filename          - file with wishes for actions to be performed
     -l ride-functions filename  - list all functions available to put in to the preset file
-    -c                          - compare functions in ride-functions file and preset file (requires both -f and -p to be set)
+    -c                          - compare functions in ride-functions file and preset file
+                                  (requires both -f and -p to be set)
     -n                          - no logging
 
-example:
-    $ sudo bash bootstrap.sh -f ride-functions.sh -p default.preset
+example: sudo bash bootstrap.sh -f ride-functions.sh -p default.preset
 
