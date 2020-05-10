@@ -25,7 +25,7 @@ Outcomment what is not wanted.
 
 
 ## Usage
-sudo bash bootstrap.sh [-f \<ride-functions filename>] [-p \<preset filename>] [-l \<ride-functions filename>] [-c] [-n]
+$ sudo bash bootstrap.sh [-f \<ride-functions filename>] [-p \<preset filename>] [-l \<ride-functions filename>] [-c] [-n]
 
     -f ride-functions filename  - file with functions available
     -p preset filename          - file with wishes for actions to be performed
@@ -33,5 +33,6 @@ sudo bash bootstrap.sh [-f \<ride-functions filename>] [-p \<preset filename>] [
     -c                          - compare functions in ride-functions file and preset file (requires both -f and -p to be set)
     -n                          - no logging
 
-example: sudo bash bootstrap.sh -f ride-functions.sh -p default.preset
+example:
+    $ sudo bash bootstrap.sh -f ride-functions.sh -p default.preset
 
