@@ -21,6 +21,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallPlaso                   #RemovePlaso
 #InstallAutopsy                 #RemoveAutopsy
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools
+#InstallVolatility              #RemoveVolatility
 
 ### Basic Tools and support ###
 InstallExfatSupport             #RemoveExfatSupport

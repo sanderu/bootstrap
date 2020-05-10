@@ -246,6 +246,36 @@ RemoveWindowsForensicTools() {
     apt remove -y dislocker fatcat galleta grokevt missidentify pasco rifiuti2 scrounge-ntfs vinetto winregfs
 }
 
+InstallVolatility() {
+    # Volatility requires python2.6+ (but not python3)
+    apt install -y python python-crypto python-distorm3
+    if [ ! -d volatility ]; then
+        cd ${MYUSERDIR}
+        git clone https://github.com/volatilityfoundation/volatility.git
+        cd volatility
+        python setup.py build
+        python setup.py install
+        python setup.py sdist
+    else
+        rm -rf ${MYUSERDIR}/volatility
+        InstallVolatility
+    fi
+}
+
+RemoveVolatility() {
+    if [ -d ${MYUSERDIR}/volatility ]; then
+        rm -rf ${MYUSERDIR}/volatility
+    fi
+    if [ -d /usr/local/lib/python2.7/volatility ]; then
+        rm -rf /usr/local/lib/python2.7/volatility
+    fi
+    if [ -f /usr/local/lib/python2.7/volatility-2.6.1.egg-info]; then
+        rm /usr/local/lib/python2.7/volatility-2.6.1.egg-info
+    fi
+    if [ -f /usr/local/bin/vol.py ]; then
+        rm /usr/local/bin/vol.py
+    fi
+}
 
 
 ###############################
