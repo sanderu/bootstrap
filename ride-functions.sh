@@ -3,7 +3,7 @@
 ################################################################
 ### RIDE-functions
 ### Remove
-### Istall
+### Install
 ### Disable
 ### Enable
 ### contains all the different functions for bootstrapping a new
