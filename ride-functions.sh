@@ -79,13 +79,13 @@ InstallPostgreSQLServer() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-    apt install -y postgresql-11
+    apt install -y postgresql-13
 }
 
 RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-    apt remove -y postgresql-11
+    apt remove -y postgresql-13
     if [ -f ${PGDG} ]; then
        rm ${PGDG}
     fi
@@ -96,13 +96,13 @@ InstallPostgreSQLClient() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-    apt install -y postgresql-client-11
+    apt install -y postgresql-client-13
 }
 
 RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-    apt remove -y postgresql-client-11
+    apt remove -y postgresql-client-13
     if [ -f ${PGDG} ]; then
         rm ${PGDG}
     fi
