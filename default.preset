@@ -18,6 +18,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallImagingTools            #RemoveImagingTools
 #InstallExifTool                #RemoveExifTool
 #InstallRecoverTools            #RemoveRecoverTools
+#InstallYara                    #RemoveYara
 #InstallPlaso                   #RemovePlaso
 #InstallAutopsy                 #RemoveAutopsy
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools

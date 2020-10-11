@@ -167,6 +167,14 @@ RemoveRecoverTools() {
     apt remove -y testdisk foremost
 }
 
+InstallYara() {
+    apt install -y yara
+}
+
+RemoveYara() {
+    apt remove -y yara
+}
+
 InstallPlaso() {
     apt install -y plaso
 }
