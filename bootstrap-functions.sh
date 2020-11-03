@@ -46,7 +46,7 @@ logOutput() {
     echo '################################################################'
     echo ''
     echo "Script: ${SCRIPTNAME}"
-    echo "Command line parameters: $@"
+    echo "Command line parameters: ${SCRIPTARGS}"
     echo "Logfile: ${LOGFILE}"
     echo "Timestamp: $(date)"
     echo ''
