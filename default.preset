@@ -31,6 +31,7 @@ InstallBasicEditor              #RemoveBasicEditor
 InstallPythonTools              #RemovePythonTools
 InstallTerminator               #RemoveTerminator
 InstallLess                     #RemoveLess
+InstallHexEditor                #RemoveHexEditor
 
 ### Accessories ###
 #InstallKeepassX                #RemoveKeepassX
@@ -94,6 +95,8 @@ SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
 #InstallAIDE                    #RemoveAIDE
 #InstallClamAV                  #RemoveClamAV
 #InstallLynis                   #RemoveLynis
+InstallAuditd                   #RemoveAuditd
+#InstallSELinux                 #RemoveSELinux
 
 ### Encryption Functions ###
 #AddExtraLUKSpasswords
