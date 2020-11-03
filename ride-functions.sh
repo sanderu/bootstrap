@@ -1019,6 +1019,8 @@ RemoveLynis() {
 
 InstallAuditd() {
     apt install -y auditd
+    wget -O /etc/audit/rules.d/audit.rules https://raw.githubusercontent.com/Neo23x0/auditd/master/audit.rules
+    augenrules
 }
 
 RemoveAuditd() {
