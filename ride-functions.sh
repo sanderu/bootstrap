@@ -341,6 +341,13 @@ RemoveLess() {
     apt remove -y less
 }
 
+InstallHexEditor() {
+    apt install -y dhex hexer wxhexeditor
+}
+
+RemoveHexEditor() {
+    apt remove -y dhex hexer wxhexeditor
+}
 
 ################################################################
 ### Accessories ###
@@ -1009,6 +1016,27 @@ InstallLynis() {
 RemoveLynis() {
     apt remove -y lynis
 }
+
+InstallAuditd() {
+    apt install -y auditd
+}
+
+RemoveAuditd() {
+    apt remove -y auditd
+}
+
+InstallSELinux() {
+    apt install -y selinux-basics selinux-policy-default selinux-policy-dev selinux-utils
+    selinux-activate
+}
+
+RemoveSELinux() {
+    apt remove -y selinux-basics selinux-policy-default selinux-policy-dev selinux-utils
+    if [ -f /etc/selinux/config ]; then
+        sed -i 's/^SELINUX=.*/SELINUX=permissive' /etc/selinux/config
+    fi
+}
+
 
 ################################################################
 ### Encryption Functions ###
