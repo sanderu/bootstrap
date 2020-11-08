@@ -602,29 +602,36 @@ RemoveSSHclient() {
 ################################################################
 
 InstallDia() {
-      apt install -y dia
+    apt install -y dia
 }
 
 RemoveDia() {
-      apt remove -y dia
+    apt remove -y dia
 }
 
 InstallWine() {
-      apt install -y wine
+    apt install -y wine
 }
 
 RemoveWine() {
-      apt remove -y wine
+    apt remove -y wine
 }
 
 InstallLibreOffice() {
-      apt install -y libreoffice
+    apt install -y libreoffice
 }
 
 RemoveLibreOffice() {
-      apt remove -y libreoffice
+    apt remove -y libreoffice
 }
 
+InstallJupyter() {
+    apt install -y jupyter-notebook markdown
+}
+
+RemoveJupyter() {
+    apt remove -y jupyter-notebook markdown
+}
 
 ################################################################
 ### Supporting scripts ###

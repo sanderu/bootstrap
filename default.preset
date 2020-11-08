@@ -61,6 +61,7 @@ InstallSSHclient                #RemoveSSHclient
 #InstallDia                     #RemoveDia
 #InstallWine                    #RemoveWine
 #InstallLibreOffice             #RemoveLibreOffice
+#InstallJupyter                 #RemoveJupyter
 
 ### Supporting scripts ###
 #InstallTecmintMonitorSh        #RemoveTecmintMonitorSh
