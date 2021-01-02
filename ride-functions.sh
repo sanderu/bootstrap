@@ -829,12 +829,15 @@ RemoveVivaldi() {
 ################################################################
 
 InstallSpotifyClient() {
-    # install Spotify client
-    curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
+    # Install Spotify gpg-key
+    wget https://www.spotify.com/us/download/linux/ -O /tmp/spotify_dl_site.html
+    APTKEY=$( awk -F 'curl -sS ' '{print $2}' /tmp/spotify_dl_site.html | awk -F '|' '{print $1}' | grep -v ^$ )
+    curl -sS ${APTKEY} | apt-key add -
     echo 'deb http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list
 
+    # Install Spotify client
     apt update
-    apt install spotify-client
+    apt install -y spotify-client
 }
 
 RemoveSpotifyClient() {
