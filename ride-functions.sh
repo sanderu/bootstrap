@@ -184,6 +184,8 @@ RemovePlaso() {
 }
 
 InstallAutopsy() {
+    # Remove libtsk13 as it is incompatible with newest version of Autopsy
+    apt remove -y libtsk13
     # Prerequisite for Autopsy
     apt install -y testdisk libpq5 libvhdi1 libvmdk1 libewf-dev libafflib-dev libsqlite3-dev libc3p0-java libpostgresql-jdbc-java libvmdk-dev libvhdi-dev libbfio1 libbfio-dev unzip
 
