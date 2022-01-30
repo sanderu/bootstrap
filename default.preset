@@ -23,6 +23,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallAutopsy                 #RemoveAutopsy
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools
 #InstallVolatility              #RemoveVolatility
+#InstallVolatility3             #RemoveVolatility3
 
 ### Basic Tools and support ###
 InstallExfatSupport             #RemoveExfatSupport
@@ -34,7 +35,6 @@ InstallLess                     #RemoveLess
 InstallHexEditor                #RemoveHexEditor
 
 ### Accessories ###
-#InstallKeepassX                #RemoveKeepassX
 InstallKeepassXC                #RemoveKeepassXC
 
 ### Programming Tools ###
@@ -44,7 +44,8 @@ InstallKeepassXC                #RemoveKeepassXC
 #InstallVisualStudioCode        #RemoveVisualStudioCode
 
 ### Communication ###
-InstallChatProgs                #RemoveChatProgs
+#InstallChatProgs               #RemoveChatProgs
+#InstallTeams                   #RemoveTeams
 #InstallEmailProgs              #RemoveEmailProgs
 
 ### NetworkConfiguration ###
@@ -56,6 +57,8 @@ InstallNetCommsTools            #RemoveNetCommsTools
 #InstallOpenconnectVPN          #RemoveOpenconnectVPN
 #InstallSSHserver               #RemoveSSHserver
 InstallSSHclient                #RemoveSSHclient
+#InstallOpenVPN                 #RemoveOpenVPN
+#InstallWireGuard               #RemoveWireGuard
 
 ### Productivity Tools ###
 #InstallDia                     #RemoveDia

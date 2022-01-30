@@ -152,11 +152,11 @@ RemoveImagingTools() {
 }
 
 InstallExifTool() {
-    apt install -y libimage-exiftool-perl
+    apt install -y exif exifprobe
 }
 
 RemoveExifTool() {
-    apt remove -y libimage-exiftool-perl
+    apt remove -y exif exifprobe
 }
 
 InstallRecoverTools() {
@@ -249,11 +249,11 @@ RemoveAutopsy() {
 }
 
 InstallWindowsForensicTools() {
-    apt install -y dislocker fatcat galleta grokevt missidentify pasco rifiuti2 scrounge-ntfs vinetto winregfs
+    apt install -y dislocker fatcat galleta grokevt libevtx-utils missidentify pasco reglookup rifiuti2 scrounge-ntfs vinetto winregfs
 }
 
 RemoveWindowsForensicTools() {
-    apt remove -y dislocker fatcat galleta grokevt missidentify pasco rifiuti2 scrounge-ntfs vinetto winregfs
+    apt remove -y dislocker fatcat galleta grokevt libevtx-utils missidentify pasco reglookup rifiuti2 scrounge-ntfs vinetto winregfs
 }
 
 InstallVolatility() {
@@ -286,6 +286,38 @@ RemoveVolatility() {
         rm /usr/local/bin/vol.py
     fi
 }
+
+InstallVolatility3() {
+    # Volatility3 requires python3.6+
+    apt install -y python3-pefile python3-yara python3-capstone python3-pycryptodome python3-jsonschema python3-snappy
+
+    # Get Volatility3 tarball from Github
+    wget -O ${DOWNLOADDIR}/latest_volatility_vers.html https://github.com/volatilityfoundation/volatility3/releases/latest
+    LATEST_VERSION=$( grep tar.gz ${DOWNLOADDIR}/latest_volatility_vers.html | head -n1 | awk -F 'href="view-source:' '{print $2}' | awk -F '">' '{print $1}' )
+    wget -O ${DOWNLOADDIR}/volatility3.tar.gz ${LATEST_VERSION}
+    VOLATILITY_VERSION=$( tar -tzvf ${DOWNLOADDIR}/volatility3.tar.gz | head -n1 | awk '{print $6}' | cut -f1 -d '/' )
+
+    cd ${MYUSERDIR}
+    if [ ! -d volatility3 ]; then
+        tar -xzvf ${DOWNLOADDIR}/volatility3.tar.gz
+        mv ${VOLATILITY_VERSION} volatility3
+        ln -s ${MYUSERDIR}/volatility3/vol.py /usr/local/bin/vol.py
+    else
+        rm -rf ${MYUSERDIR}/volatility3
+        InstallVolatility3
+    fi
+}
+
+RemoveVolatility3() {
+    apt remove -y python3-pefile python3-yara python3-capstone python3-pycryptodome python3-jsonschema python3-snappy
+    if [ -d ${MYUSERDIR}/volatility3 ]; then
+        rm -rf ${MYUSERDIR}/volatility3
+    fi
+    if [ -f /usr/local/bin/vol.py ]; then
+        rm /usr/local/bin/vol.py
+    fi
+}
+
 
 
 ###############################
@@ -354,14 +386,6 @@ RemoveHexEditor() {
 ################################################################
 ### Accessories ###
 ################################################################
-
-InstallKeepassX() {
-    apt install -y keepassx
-}
-
-RemoveKeepassX() {
-    apt remove -y keepassx
-}
 
 InstallKeepassXC() {
     apt install -y keepassxc
@@ -484,8 +508,10 @@ EnableAtomTelemetry(){
 }
 
 InstallVisualStudioCode() {
-    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-    chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
+        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    fi
     echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
 
     #Then update the package cache and install the package using:
@@ -508,6 +534,21 @@ InstallChatProgs() {
 
 RemoveChatProgs() {
     apt remove -y hexchat hexchat-otr finch pidgin pidgin-otr
+}
+
+InstallTeams() {
+    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
+        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    fi
+    echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' > /etc/apt/sources.list.d/teams.list
+
+    apt update
+    apt install -y teams
+}
+
+RemoveTeams() {
+    apt remove -y teams
 }
 
 InstallEmailProgs() {
@@ -598,6 +639,23 @@ InstallSSHclient() {
 RemoveSSHclient() {
     apt remove -y openssh-client
 }
+
+InstallOpenVPN() {
+    apt install -y openvpn3
+}
+
+RemoveOpenVPN() {
+    apt remove -y openvpn3
+}
+
+InstallWireGuard() {
+    apt install -y wireguard-dkms wireguard-tools
+}
+
+RemoveWireGuard() {
+    apt remove -y wireguard-dkms wireguard-tools
+}
+
 
 ################################################################
 ### Productivity Tools ###
