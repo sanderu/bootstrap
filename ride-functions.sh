@@ -1060,6 +1060,23 @@ RemoveVMwareWorkstation() {
     vmware-installer --uninstall-product=vmware-workstation
 }
 
+InstallPowerShell() {
+    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
+        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    fi
+    DEBVERSIONNAME=$( grep VERSION_CODENAME /etc/os-release | awk -F '=' '{print $2}' )
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-${DEBVERSIONNAME}-prod ${DEBVERSIONNAME} main" > /etc/apt/sources.list.d/powershell.list
+
+    apt update
+    apt install -y powershell
+}
+
+RemovePowerShell() {
+    apt remove -y powershell
+}
+
+
 ################################################################
 ### Security related ###
 ################################################################
@@ -1334,4 +1351,3 @@ RemoveKeyfileMounts() {
         done
     done
 }
-

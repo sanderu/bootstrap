@@ -94,6 +94,7 @@ SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
 
 ### 3rd party applications ###
 #InstallVMwareWorkstation       #RemoveVMwareWorkstation
+#InstallPowerShell              #RemovePowerShell
 
 ### Security related ###
 #InstallAIDE                    #RemoveAIDE
