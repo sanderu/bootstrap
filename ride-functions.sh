@@ -452,6 +452,8 @@ InstallAtomPlugins() {
         su - ${MYUSER} sh -c 'apm install open-recent'
         su - ${MYUSER} sh -c 'apm install compare-files'
         su - ${MYUSER} sh -c 'apm install language-powershell'
+        su - ${MYUSER} sh -c 'apm install language-python'
+        su - ${MYUSER} sh -c 'apm install markdown-preview-enhanced'
     fi
 }
 
@@ -466,6 +468,8 @@ RemoveAtomPlugins() {
         su - ${MYUSER} sh -c 'apm uninstall open-recent'
         su - ${MYUSER} sh -c 'apm uninstall compare-files'
         su - ${MYUSER} sh -c 'apm uninstall language-powershell'
+        su - ${MYUSER} sh -c 'apm uninstall language-python'
+        su - ${MYUSER} sh -c 'apm uninstall markdown-preview-enhanced'
     fi
 }
 
