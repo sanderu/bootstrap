@@ -553,6 +553,7 @@ InstallTeams() {
 
 RemoveTeams() {
     apt remove -y teams
+    rm /etc/apt/sources.list.d/teams.list
 }
 
 InstallEmailProgs() {
@@ -1078,6 +1079,7 @@ InstallPowerShell() {
 
 RemovePowerShell() {
     apt remove -y powershell
+    rm /etc/apt/sources.list.d/powershell.list
 }
 
 
