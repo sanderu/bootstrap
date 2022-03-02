@@ -598,11 +598,11 @@ DisableMulticastDNS() {
 }
 
 InstallNetworkTools() {
-    apt install -y tcpdump wireshark nmap macchanger flow-tools
+    apt install -y tcpdump wireshark nmap macchanger flow-tools tcpreplay
 }
 
 RemoveNetworkTools() {
-    apt remove -y tcpdump wireshark nmap macchanger flow-tools
+    apt remove -y tcpdump wireshark nmap macchanger flow-tools tcpreplay
 }
 
 InstallNetCommsTools() {
