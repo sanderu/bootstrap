@@ -256,6 +256,19 @@ RemoveWindowsForensicTools() {
     apt remove -y dislocker fatcat galleta grokevt libevtx-utils missidentify pasco reglookup rifiuti2 scrounge-ntfs vinetto winregfs
 }
 
+InstallBMCTools() {
+    cd ${DOWNLOADDIR}
+    git clone https://github.com/ANSSI-FR/bmc-tools.git
+    cp bmc-tools/bmc-tools.py /usr/local/bin/
+    chmod +x /usr/local/bin/bmc-tools.py
+}
+
+RemoveBMCTools() {
+    if [ -f /usr/local/bin/bmc-tools.py ]; then
+        rm /usr/local/bin/bmc-tools.py
+    fi
+}
+
 InstallVolatility() {
     # Volatility requires python2.6+ (but not python3)
     apt install -y python python-crypto python-distorm3

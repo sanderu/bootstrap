@@ -22,6 +22,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallPlaso                   #RemovePlaso
 #InstallAutopsy                 #RemoveAutopsy
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools
+#InstallBMCTools                #RemoveBMCTools
 #InstallVolatility              #RemoveVolatility
 #InstallVolatility3             #RemoveVolatility3
 
