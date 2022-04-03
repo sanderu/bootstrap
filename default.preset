@@ -25,6 +25,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallBMCTools                #RemoveBMCTools
 #InstallVolatility              #RemoveVolatility
 #InstallVolatility3             #RemoveVolatility3
+#InstallGhidra                  #RemoveGhidra
 
 ### Basic Tools and support ###
 InstallExfatSupport             #RemoveExfatSupport

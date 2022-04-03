@@ -331,6 +331,28 @@ RemoveVolatility3() {
     fi
 }
 
+InstallGhidra() {
+    if [ ! -d ${MYUSERDIR}/ghidra ]; then
+        apt install -y curl openjdk-11-jdk unzip wget
+        LATEST=$( curl -S https://github.com/NationalSecurityAgency/ghidra/releases/latest | awk -F '<a href="' '{print $2}' | awk -F '">' '{print $1}' )
+        LATEST_VERS=$( wget ${LATEST} -O - | grep ghidra_ | awk -F '"px-1 text-bold">' '{print $2}' | awk -F '<' '{print $1}' )
+        ZIP_FILE=$( echo ${LATEST}/$( echo ${LATEST_VERS} ) | sed -e 's/tag/download/g' )
+        wget ${ZIP_FILE} -O ${DOWNLOADDIR}/ghidra.zip
+        cd ${MYUSERDIR}
+        unzip ${DOWNLOADDIR}/ghidra.zip
+        mv ghidra_* ghidra
+    else
+        rm -rf ${MYUSERDIR}/ghidra
+        InstallGhidra
+    fi
+}
+
+RemoveGhidra() {
+    apt remove -y openjdk-11-jdk unzip
+    if [ -d ${MYUSERDIR} ]; then
+        rm ${MYUSERDIR}/ghidra
+    fi
+}
 
 
 ###############################
