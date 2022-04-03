@@ -208,7 +208,7 @@ InstallAutopsy() {
     wget -O ${TMP_GITHUB_AUTOPSY} https://github.com/sleuthkit/autopsy/releases/
 
     LATEST_SLEUTH_JAVA="https://github.com"$( cat ${TMP_GITHUB_SLEUTH} | grep -o -E 'href="([^"#]+)"' | grep '.deb"' | cut -f2 -d '"' | sort -r -V | awk NR==1 )
-    LATEST_AUTOPSY="https://github.com"$( cat ${TMP_GITHUB_AUTOPSY} | grep -o -E 'href="([^"#]+)"' | grep '.zip"' | cut -d'"' -f2 | sort -r -V | awk NR==1 )
+    LATEST_AUTOPSY="https://github.com"$( cat ${TMP_GITHUB_AUTOPSY} | grep -o -E 'href="([^"#]+)"' | grep '.zip"' | grep download | cut -d'"' -f2 | sort -r -V | awk NR==1 )
 
     # We cannot import Brian Carriers GPG key - so unable to do signature verification
     #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
