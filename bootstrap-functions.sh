@@ -60,7 +60,7 @@ getOSrelease() {
         elif [ x${OS} == x'CentOS' ]; then
             OSRELEASENAME=$( awk -F 'VERSION_ID="' '{print $2}' /etc/os-release | cut -f 1 -d '"' )
         elif [ x${OS} == x'Fedora' ]; then
-            OSRELEASENAME=$( awk -F 'VERSION_ID="' '{print $2}' /etc/os-release | cut -f 1 -d '"' )
+            OSRELEASENAME=$( awk -F'ID=' '/VERSION_ID=/ {print $2}' /etc/os-release )
         fi
     else
         OSRELEASENAME='N/A'
