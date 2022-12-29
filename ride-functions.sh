@@ -349,8 +349,8 @@ InstallGhidra() {
 
 RemoveGhidra() {
     apt remove -y openjdk-11-jdk unzip
-    if [ -d ${MYUSERDIR} ]; then
-        rm ${MYUSERDIR}/ghidra
+    if [ -d ${MYUSERDIR}/ghidra ]; then
+        rm -rf ${MYUSERDIR}/ghidra
     fi
 }
 
