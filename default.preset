@@ -27,6 +27,9 @@ InstallAwesome                  #RemoveAwesome
 #InstallVolatility3             #RemoveVolatility3
 #InstallGhidra                  #RemoveGhidra
 
+### CTF / Pentest tools ###
+InstallBurp                     #RemoveBurp
+
 ### Basic Tools and support ###
 InstallExfatSupport             #RemoveExfatSupport
 InstallPackagingTools           #RemovePackagingTools

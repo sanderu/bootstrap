@@ -355,6 +355,29 @@ RemoveGhidra() {
 }
 
 
+###########################
+### CTF / Pentest tools ###
+###########################
+
+InstallBurp() {
+    if [ ! -d ${MYUSERDIR}/BurpSuiteCommunity ]; then
+        LATEST=$( wget https://portswigger.net/burp/releases/community/latest -O /tmp/burp_latest.txt )
+        VERSION=$( grep 'value="Download" version=' /tmp/burp_latest.txt | awk -F 'version="' '{print $2}' | cut -f1 -d '"' )
+        wget "https://portswigger.net/burp/releases/startdownload?product=community&version=$VERSION&type=Linux" -O ${DOWNLOADDIR}/burp.sh
+        su - ${MYUSER} sh -c "cd ${MYUSERDIR} && sh ${DOWNLOADDIR}/burp.sh"
+    else
+        rm -rf ${MYUSERDIR}/BurpSuiteCommunity
+        InstallBurp
+    fi
+}
+
+RemoveBurp() {
+    if  [ -d ${MYUSERDIR}/BurpSuiteCommunity ]; then
+        rm -rf ${MYUSERDIR}/BurpSuiteCommunity
+    fi
+}
+
+
 ###############################
 ### Basic Tools and support ###
 ###############################
