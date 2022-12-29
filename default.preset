@@ -40,9 +40,6 @@ InstallHexEditor                #RemoveHexEditor
 InstallKeepassXC                #RemoveKeepassXC
 
 ### Programming Tools ###
-#InstallAtomEditor              #RemoveAtomEditor
-#InstallAtomPlugins             #RemoveAtomPlugins
-#EnableAtomTelemetry            #DisableAtomTelemetry
 #InstallVisualStudioCode        #RemoveVisualStudioCode
 
 ### Communication ###
