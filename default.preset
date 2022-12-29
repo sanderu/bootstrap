@@ -36,9 +36,6 @@ InstallTerminator               #RemoveTerminator
 InstallLess                     #RemoveLess
 InstallHexEditor                #RemoveHexEditor
 
-### Accessories ###
-InstallKeepassXC                #RemoveKeepassXC
-
 ### Programming Tools ###
 #InstallVisualStudioCode        #RemoveVisualStudioCode
 
@@ -96,6 +93,7 @@ SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
 #InstallPowerShell              #RemovePowerShell
 
 ### Security related ###
+InstallKeepassXC                #RemoveKeepassXC
 #InstallAIDE                    #RemoveAIDE
 #InstallClamAV                  #RemoveClamAV
 #InstallLynis                   #RemoveLynis

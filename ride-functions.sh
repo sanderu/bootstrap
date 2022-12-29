@@ -418,18 +418,6 @@ RemoveHexEditor() {
     apt remove -y dhex hexer wxhexeditor
 }
 
-################################################################
-### Accessories ###
-################################################################
-
-InstallKeepassXC() {
-    apt install -y keepassxc
-}
-
-RemoveKeepassXC() {
-    apt remove -y keepassxc
-}
-
 
 ################################################################
 ### Programming Tools ###
@@ -1010,6 +998,15 @@ RemovePowerShell() {
 ################################################################
 ### Security related ###
 ################################################################
+
+InstallKeepassXC() {
+    apt install -y keepassxc
+}
+
+RemoveKeepassXC() {
+    apt remove -y keepassxc
+}
+
 InstallAIDE() {
     apt install -y aide
 }
