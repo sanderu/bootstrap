@@ -345,6 +345,7 @@ InstallGhidra() {
         rm -rf ${MYUSERDIR}/ghidra
         InstallGhidra
     fi
+    chown -R ${MYUSER}:${MYUSER} ${MYUSERDIR}/ghidra
 }
 
 RemoveGhidra() {
