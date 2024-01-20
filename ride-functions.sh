@@ -79,13 +79,13 @@ InstallPostgreSQLServer() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-    apt install -y postgresql-13
+    apt install -y postgresql-16
 }
 
 RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-    apt remove -y postgresql-13
+    apt remove -y postgresql-16
     if [ -f ${PGDG} ]; then
        rm ${PGDG}
     fi
@@ -96,13 +96,13 @@ InstallPostgreSQLClient() {
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
     wget --quiet -O - ${PGDG_KEY} | apt-key add -
     apt update
-    apt install -y postgresql-client-13
+    apt install -y postgresql-client-16
 }
 
 RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
     apt-key del ACCC4CF8
-    apt remove -y postgresql-client-13
+    apt remove -y postgresql-client-16
     if [ -f ${PGDG} ]; then
         rm ${PGDG}
     fi
@@ -185,38 +185,27 @@ RemovePlaso() {
 
 InstallAutopsy() {
     # Remove libtsk13 as it is incompatible with newest version of Autopsy
-    apt remove -y libtsk13
+    apt remove -y libtsk19
     # Prerequisite for Autopsy
-    apt install -y testdisk libpq5 libvhdi1 libvmdk1 libde265-0 libheif1 libewf-dev libafflib-dev libsqlite3-dev libc3p0-java libpostgresql-jdbc-java libvmdk-dev libvhdi-dev libbfio1 libbfio-dev unzip
+    apt install -y openjdk-17-jre-headless testdisk libpq-dev libvhdi-dev libvmdk-dev libde265-dev libheif-dev libewf-dev libafflib-dev libsqlite3-dev libc3p0-java libpostgresql-jdbc-java libvmdk-dev libvhdi-dev libbfio-dev unzip
 
-    # Install BellSoft Java 8
-    wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
-    echo 'deb [arch=amd64] https://apt.bell-sw.com/ stable main' | tee /etc/apt/sources.list.d/bellsoft.list
-    apt update
-    apt install -y bellsoft-java8-full
+    # Get download page for links
+    wget -q -O ${DOWNLOADDIR}/autopsy.html https://www.autopsy.com/download/
+
+    LATEST_SLEUTH_JAVA=$( grep Linux ${DOWNLOADDIR}/autopsy.html | grep .deb | grep href | awk -F 'href="' '{print $2}' | awk -F '">' '{print $1}')
+    LATEST_AUTOPSY=$( grep Download ${DOWNLOADDIR}/autopsy.html | grep .zip | grep href | awk -F 'href="' '{print $2}' | awk -F '">' '{print $1}' )
 
     # Set JAVA_HOME
-    #NOTE: You may need to log out and back in again after setting JAVA_HOME before the Autopsy
-    #      unix_setup.sh script can see the value.
-    export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
-    echo 'JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64' >> ${MYUSERDIR}/.bashrc
+    export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    echo 'JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ${MYUSERDIR}/.bashrc
 
-    # Get github pages for parsing:
-    TMP_GITHUB_SLEUTH="${DOWNLOADDIR}/github_sleuth.html"
-    wget -O ${TMP_GITHUB_SLEUTH} https://github.com/sleuthkit/sleuthkit/releases/
-    TMP_GITHUB_AUTOPSY="${DOWNLOADDIR}/github_autopsy.html"
-    wget -O ${TMP_GITHUB_AUTOPSY} https://github.com/sleuthkit/autopsy/releases/
-
-    LATEST_SLEUTH_JAVA="https://github.com"$( cat ${TMP_GITHUB_SLEUTH} | grep -o -E 'href="([^"#]+)"' | grep '.deb"' | cut -f2 -d '"' | sort -r -V | awk NR==1 )
-    LATEST_AUTOPSY="https://github.com"$( cat ${TMP_GITHUB_AUTOPSY} | grep -o -E 'href="([^"#]+)"' | grep '.zip"' | grep download | cut -d'"' -f2 | sort -r -V | awk NR==1 )
-
-    # We cannot import Brian Carriers GPG key - so unable to do signature verification
-    #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
-    #gpg: data source: https://keys.openpgp.org:443
-    #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
-    #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".  Enter number(s), N)ext, or Q)uit > n
-    #LATESTAUTOPSYSIGNATURE="${LATESTAUTOPSY}.asc"
-    #LATESTVERIFIEDSIGNATURE=$(grep "GPG key" ${TMP_GITHUB_AUTOPSY} |sort -r -V | awk 'NR==1' | awk -F '>' '{print $3}' | cut -f1 -d'<')
+#    # We cannot import Brian Carriers GPG key - so unable to do signature verification
+#    #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
+#    #gpg: data source: https://keys.openpgp.org:443
+#    #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
+#    #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".  Enter number(s), N)ext, or Q)uit > n
+#    #LATESTAUTOPSYSIGNATURE="${LATESTAUTOPSY}.asc"
+#    #LATESTVERIFIEDSIGNATURE=$(grep "GPG key" ${TMP_GITHUB_AUTOPSY} |sort -r -V | awk 'NR==1' | awk -F '>' '{print $3}' | cut -f1 -d'<')
 
     # Install Sleuthkit Java:
     cd ${DOWNLOADDIR}
@@ -234,11 +223,11 @@ InstallAutopsy() {
     unzip ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
     chown -R ${MYUSER}:${MYUSER} ${AUTOPSYSUBDIR}/
     chmod +x ${AUTOPSYSUBDIR}/unix_setup.sh
-    if [ -d /usr/lib/jvm/bellsoft-java8-full-amd64 ]; then
-        sed -i "/^TSK_VERSION=.*$/a JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64" ${AUTOPSYSUBDIR}/unix_setup.sh
+    if [ -d /usr/lib/jvm/java-17-openjdk-amd64 ]; then
+        sed -i "/^TSK_VERSION=.*$/a JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" ${AUTOPSYSUBDIR}/unix_setup.sh
         su - ${MYUSER} sh -c "cd ${AUTOPSYSUBDIR} && ./unix_setup.sh"
     else
-        echo 'Something has gone wrong - the bellsoft-java8-full package has not been installed correctly.'
+        echo 'Something has gone wrong - the java-17-openjdk-amd64 package has not been installed correctly.'
     fi
 }
 
@@ -266,37 +255,6 @@ InstallBMCTools() {
 RemoveBMCTools() {
     if [ -f /usr/local/bin/bmc-tools.py ]; then
         rm /usr/local/bin/bmc-tools.py
-    fi
-}
-
-InstallVolatility() {
-    # Volatility requires python2.6+ (but not python3)
-    apt install -y python python-crypto python-distorm3
-    if [ ! -d volatility ]; then
-        cd ${MYUSERDIR}
-        git clone https://github.com/volatilityfoundation/volatility.git
-        cd volatility
-        python setup.py build
-        python setup.py install
-        python setup.py sdist
-    else
-        rm -rf ${MYUSERDIR}/volatility
-        InstallVolatility
-    fi
-}
-
-RemoveVolatility() {
-    if [ -d ${MYUSERDIR}/volatility ]; then
-        rm -rf ${MYUSERDIR}/volatility
-    fi
-    if [ -d /usr/local/lib/python2.7/volatility ]; then
-        rm -rf /usr/local/lib/python2.7/volatility
-    fi
-    if [ -f /usr/local/lib/python2.7/volatility-2.6.1.egg-info]; then
-        rm /usr/local/lib/python2.7/volatility-2.6.1.egg-info
-    fi
-    if [ -f /usr/local/bin/vol.py ]; then
-        rm /usr/local/bin/vol.py
     fi
 }
 
