@@ -216,8 +216,8 @@ InstallAutopsy() {
     #gpg: data source: https://keys.openpgp.org:443
     #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
     #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".
-    gpg --verify ${DOWNLOADDIR}/autopsy_signature.asc ${DOWNLOADDIR}/${AUTOPSYINSTALLER} > /tmp/check.txt 2>&1
-    if [ $( grep -E '0917A7EE58A9308B13D3963338AD602EC7454C8B|carrier@sleuthkit.org' /tmp/check.txt | wc -l ) -ne 2 ]; then
+    gpg --verify ${DOWNLOADDIR}/autopsy_signature.asc ${DOWNLOADDIR}/${AUTOPSYINSTALLER} > /tmp/autopsy_sigcheck.txt 2>&1
+    if [ $( grep -E '0917A7EE58A9308B13D3963338AD602EC7454C8B|carrier@sleuthkit.org' /tmp/autopsy_sigcheck.txt | wc -l ) -ne 2 ]; then
         echo 'Autopsy signature of package does not match known signature from Brian Carrier - pls investigate manually.'
         exit 1
     fi
