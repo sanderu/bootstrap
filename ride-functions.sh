@@ -194,18 +194,11 @@ InstallAutopsy() {
 
     LATEST_SLEUTH_JAVA=$( grep Linux ${DOWNLOADDIR}/autopsy.html | grep .deb | grep href | awk -F 'href="' '{print $2}' | awk -F '">' '{print $1}')
     LATEST_AUTOPSY=$( grep Download ${DOWNLOADDIR}/autopsy.html | grep .zip | grep href | awk -F 'href="' '{print $2}' | awk -F '">' '{print $1}' )
+    LATESTAUTOPSYSIGNATURE="${LATEST_AUTOPSY}.asc"
 
     # Set JAVA_HOME
     export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
     echo 'JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ${MYUSERDIR}/.bashrc
-
-#    # We cannot import Brian Carriers GPG key - so unable to do signature verification
-#    #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
-#    #gpg: data source: https://keys.openpgp.org:443
-#    #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
-#    #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".  Enter number(s), N)ext, or Q)uit > n
-#    #LATESTAUTOPSYSIGNATURE="${LATESTAUTOPSY}.asc"
-#    #LATESTVERIFIEDSIGNATURE=$(grep "GPG key" ${TMP_GITHUB_AUTOPSY} |sort -r -V | awk 'NR==1' | awk -F '>' '{print $3}' | cut -f1 -d'<')
 
     # Install Sleuthkit Java:
     cd ${DOWNLOADDIR}
@@ -216,7 +209,18 @@ InstallAutopsy() {
     # Install Autopsy:
     AUTOPSYINSTALLER="$( basename ${LATEST_AUTOPSY} )"
     wget --quiet --show-progress ${LATEST_AUTOPSY} -O ${DOWNLOADDIR}/${AUTOPSYINSTALLER}
-    #wget --quiet ${LATESTAUTOPSYSIGNATURE}
+    wget --quiet ${LATESTAUTOPSYSIGNATURE} -O ${DOWNLOADDIR}/autopsy_signature.asc
+
+    # Ensure Autopsy package is correctly signed by Brian Carriers GPG key:
+    #$ gpg --search 0x0917A7EE58A9308B13D3963338AD602EC7454C8B
+    #gpg: data source: https://keys.openpgp.org:443
+    #(1)      1024 bit DSA key 38AD602EC7454C8B, created: 2004-03-04
+    #Keys 1-1 of 1 for "0x0917A7EE58A9308B13D3963338AD602EC7454C8B".
+    gpg --verify ${DOWNLOADDIR}/autopsy_signature.asc ${DOWNLOADDIR}/${AUTOPSYINSTALLER} > /tmp/check.txt 2>&1
+    if [ $( grep -E '0917A7EE58A9308B13D3963338AD602EC7454C8B|carrier@sleuthkit.org' /tmp/check.txt | wc -l ) -ne 2 ]; then
+        echo 'Autopsy signature of package does not match known signature from Brian Carrier - pls investigate manually.'
+        exit 1
+    fi
 
     cd ${MYUSERDIR}
     AUTOPSYSUBDIR=$( unzip -l ${DOWNLOADDIR}/${AUTOPSYINSTALLER} | awk 'NR==5' | awk '{print $4}' | cut -f 1 -d '/' )
