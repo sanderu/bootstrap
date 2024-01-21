@@ -293,6 +293,10 @@ RemoveVolatility3() {
     fi
 }
 
+#################################
+### Reverse Engineering tools ###
+#################################
+
 InstallGhidra() {
     if [ ! -d ${MYUSERDIR}/ghidra ]; then
         apt install -y curl openjdk-11-jdk unzip wget
@@ -315,6 +319,36 @@ RemoveGhidra() {
     if [ -d ${MYUSERDIR}/ghidra ]; then
         rm -rf ${MYUSERDIR}/ghidra
     fi
+}
+
+InstallRadare2() {
+    # Install radare2 - reverse engineering framework
+    BASEURL='https://github.com/radareorg/radare2/releases'
+    wget ${BASEURL}/latest -O r2latest.txt
+    R2_VERSION=$( grep Release r2latest.txt | grep '<title>' | awk '{print $2}' )
+    R2_DEB="radare2_${R2_VERSION}_amd64.deb"
+    wget ${BASEURL}/download/${R2_VERSION}/${R2_DEB} -O /tmp/${R2_DEB}
+    dpkg -i /tmp/${R2_DEB}
+}
+
+RemoveRadare2() {
+    apt remove -y radare2
+}
+
+InstallIaito() {
+    # Install Qt GUI frontend to radare2
+    apt install -y libqt5svg5
+    BASEURL='https://github.com/radareorg/iaito/releases'
+    wget ${BASEURL}/latest -O iaitolatest.txt
+    IAITO_VERSION=$( grep Release iaitolatest.txt | grep '<title>' | awk '{print $2}' )
+    IAITO_DEB="iaito_${IAITO_VERSION}_amd64.deb"
+    wget ${BASEURL}/download/${IAITO_VERSION}/${IAITO_DEB} -O /tmp/${IAITO_DEB}
+    dpkg -i /tmp/${IAITO_DEB}
+
+}
+
+RemoveIaito() {
+    apt remove -y iaito
 }
 
 

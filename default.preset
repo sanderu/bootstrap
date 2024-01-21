@@ -23,9 +23,12 @@ InstallAwesome                  #RemoveAwesome
 #InstallAutopsy                 #RemoveAutopsy
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools
 #InstallBMCTools                #RemoveBMCTools
-#InstallVolatility              #RemoveVolatility
 #InstallVolatility3             #RemoveVolatility3
+
+### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
+#InstallRadare2                 #RemoveRadare2
+#InstallIaito                   #RemoveIaito
 
 ### CTF / Pentest tools ###
 InstallBurp                     #RemoveBurp
