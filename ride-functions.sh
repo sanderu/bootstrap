@@ -325,7 +325,7 @@ RemoveGhidra() {
 InstallBurp() {
     if [ ! -d ${MYUSERDIR}/BurpSuiteCommunity ]; then
         LATEST=$( wget https://portswigger.net/burp/releases/community/latest -O /tmp/burp_latest.txt )
-        VERSION=$( grep 'value="Download" version=' /tmp/burp_latest.txt | awk -F 'version="' '{print $2}' | cut -f1 -d '"' )
+        VERSION=$( grep 'value="Download" version=' /tmp/burp_latest.txt | awk -F 'version="' '{print $2}' | cut -f1 -d '"' | sed -e '/^$/d' )
         wget "https://portswigger.net/burp/releases/startdownload?product=community&version=$VERSION&type=Linux" -O ${DOWNLOADDIR}/burp.sh
         su - ${MYUSER} sh -c "cd ${MYUSERDIR} && sh ${DOWNLOADDIR}/burp.sh"
     else
