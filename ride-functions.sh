@@ -381,7 +381,7 @@ InstallEDBDebugger() {
 }
 
 RemoveEDBDebugger() {
-    for FILE in /usr/local/share/man/man1/edb.1 /usr/local/share/applications/edb.desktop /usr/local/share/pixmaps/edb.png /usr/local/bin/edb /usr/local/lib/edb/* /usr/local/lib/libgdtoa-desktop.so /usr/local/lib/pkgconfig/gdtoa-desktop.pc /usr/local/include/gdtoa-desktop/*
+    for FILE in /usr/local/share/man/man1/edb.1 /usr/local/share/applications/edb.desktop /usr/local/share/pixmaps/edb.png /usr/local/bin/edb /usr/local/lib/edb/* /usr/local/lib/libgdtoa-desktop.so /usr/local/lib/pkgconfig/gdtoa-desktop.pc /usr/local/include/gdtoa-desktop/* ; do
         rm ${FILE}
     done
     rmdir /usr/local/include/gdtoa-desktop/
