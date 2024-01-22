@@ -29,9 +29,10 @@ InstallAwesome                  #RemoveAwesome
 #InstallGhidra                  #RemoveGhidra
 #InstallRadare2                 #RemoveRadare2
 #InstallIaito                   #RemoveIaito
+#InstallEDBDebugger             #RemoveEDBDebugger
 
 ### CTF / Pentest tools ###
-InstallBurp                     #RemoveBurp
+#InstallBurp                     #RemoveBurp
 
 ### Basic Tools and support ###
 InstallExfatSupport             #RemoveExfatSupport
