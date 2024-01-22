@@ -356,6 +356,38 @@ RemoveIaito() {
     apt remove -y iaito
 }
 
+InstallEDBDebugger() {
+    # Install prerequisites
+    apt install -y pkg-config cmake build-essential libboost-dev libdouble-conversion-dev libqt5xmlpatterns5-dev qtbase5-dev qttools5-dev libgraphviz-dev libqt5svg5-dev libcapstone-dev
+
+    # EDB Debugger uses gdtoa-desktop for binary-decimal conversion
+    # so need to make/install it first
+    cd ${DOWNLOADDIR}
+    git clone https://github.com/10110111/gdtoa-desktop.git
+    mkdir gdtoa-desktop/build
+    cd gdtoa-desktop/build
+    cmake ..
+    make
+    make install
+
+    # Build EDB Debugger
+    cd ${DOWNLOADDIR}
+    git clone --recursive https://github.com/eteran/edb-debugger.git
+    mkdir edb-debugger/build
+    cd edb-debugger/build
+    cmake ..
+    make
+    make install
+}
+
+RemoveEDBDebugger() {
+    for FILE in /usr/local/share/man/man1/edb.1 /usr/local/share/applications/edb.desktop /usr/local/share/pixmaps/edb.png /usr/local/bin/edb /usr/local/lib/edb/* /usr/local/lib/libgdtoa-desktop.so /usr/local/lib/pkgconfig/gdtoa-desktop.pc /usr/local/include/gdtoa-desktop/*
+        rm ${FILE}
+    done
+    rmdir /usr/local/include/gdtoa-desktop/
+    rmdir /usr/local/lib/edb
+}
+
 
 ###########################
 ### CTF / Pentest tools ###
