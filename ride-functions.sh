@@ -299,11 +299,16 @@ RemoveVolatility3() {
 
 InstallGhidra() {
     if [ ! -d ${MYUSERDIR}/ghidra ]; then
-        apt install -y curl openjdk-11-jdk unzip wget
-        LATEST=$( curl -S https://github.com/NationalSecurityAgency/ghidra/releases/latest | awk -F '<a href="' '{print $2}' | awk -F '">' '{print $1}' )
-        LATEST_VERS=$( wget ${LATEST} -O - | grep ghidra_ | awk -F '"px-1 text-bold">' '{print $2}' | awk -F '<' '{print $1}' )
-        ZIP_FILE=$( echo ${LATEST}/$( echo ${LATEST_VERS} ) | sed -e 's/tag/download/g' )
-        wget ${ZIP_FILE} -O ${DOWNLOADDIR}/ghidra.zip
+        apt install -y curl openjdk-17-jdk unzip wget
+        LATEST=$( wget https://github.com/NationalSecurityAgency/ghidra/releases/latest -O /tmp/ghidra_latest.txt )
+        LATEST_VERS=$( grep '<title>' /tmp/ghidra_latest.txt | awk '{print $3}'
+        #get ${LATEST} -O - | grep ghidra_ | awk -F '"px-1 text-bold">' '{print $2}' | awk -F '<' '{print $1}' )
+        LIST_OF_BUILDS=$( grep 'https://github.com/NationalSecurityAgency/ghidra/releases/expanded_assets' /tmp/ghidra_latest.txt | awk -F 'src="' '{print $2}' | awk -F '"' '{print $1}')
+        wget ${LIST_OF_BUILDS} -O /tmp/ghidra_latest_builds.txt
+        LATEST_GHIDRA_BUILD=$( grep "ghidra_${LATEST_VERS}" /tmp/ghidra_latest_builds.txt | grep href | awk -F 'href="' '{print $2}' | awk -F '"' '{print $1}' )
+        wget https://github.com${LATEST_GHIDRA_BUILD} -O ${DOWNLOADDIR}/ghidra.zip
+#        ZIP_FILE=$( echo ${LATEST}/$( echo ${LATEST_VERS} ) | sed -e 's/tag/download/g' )
+#        wget ${ZIP_FILE} -O ${DOWNLOADDIR}/ghidra.zip
         cd ${MYUSERDIR}
         unzip ${DOWNLOADDIR}/ghidra.zip
         mv ghidra_* ghidra
@@ -315,7 +320,7 @@ InstallGhidra() {
 }
 
 RemoveGhidra() {
-    apt remove -y openjdk-11-jdk unzip
+    apt remove -y openjdk-17-jdk unzip
     if [ -d ${MYUSERDIR}/ghidra ]; then
         rm -rf ${MYUSERDIR}/ghidra
     fi
