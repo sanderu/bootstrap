@@ -301,7 +301,7 @@ InstallGhidra() {
     if [ ! -d ${MYUSERDIR}/ghidra ]; then
         apt install -y curl openjdk-17-jdk unzip wget
         LATEST=$( wget https://github.com/NationalSecurityAgency/ghidra/releases/latest -O /tmp/ghidra_latest.txt )
-        LATEST_VERS=$( grep '<title>' /tmp/ghidra_latest.txt | awk '{print $3}'
+        LATEST_VERS=$( grep '<title>' /tmp/ghidra_latest.txt | awk '{print $3}' )
         #get ${LATEST} -O - | grep ghidra_ | awk -F '"px-1 text-bold">' '{print $2}' | awk -F '<' '{print $1}' )
         LIST_OF_BUILDS=$( grep 'https://github.com/NationalSecurityAgency/ghidra/releases/expanded_assets' /tmp/ghidra_latest.txt | awk -F 'src="' '{print $2}' | awk -F '"' '{print $1}')
         wget ${LIST_OF_BUILDS} -O /tmp/ghidra_latest_builds.txt
