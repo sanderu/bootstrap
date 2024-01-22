@@ -385,11 +385,11 @@ RemoveBurp() {
 ###############################
 
 InstallExfatSupport() {
-    apt install -y exfat-fuse exfat-utils
+    apt install -y exfat-fuse exfatprogs
 }
 
 RemoveExfatSupport() {
-    apt remove -y exfat-fuse exfat-utils
+    apt remove -y exfat-fuse exfatprogs
 }
 
 InstallPackagingTools() {
