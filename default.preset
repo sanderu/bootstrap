@@ -48,7 +48,6 @@ InstallHexEditor                #RemoveHexEditor
 
 ### Communication ###
 #InstallChatProgs               #RemoveChatProgs
-#InstallTeams                   #RemoveTeams
 #InstallEmailProgs              #RemoveEmailProgs
 
 ### NetworkConfiguration ###

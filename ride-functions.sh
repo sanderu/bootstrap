@@ -518,22 +518,6 @@ RemoveChatProgs() {
     apt remove -y hexchat hexchat-otr finch pidgin pidgin-otr
 }
 
-InstallTeams() {
-    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
-        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
-    fi
-    echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' > /etc/apt/sources.list.d/teams.list
-
-    apt update
-    apt install -y teams
-}
-
-RemoveTeams() {
-    apt remove -y teams
-    rm /etc/apt/sources.list.d/teams.list
-}
-
 InstallEmailProgs() {
     apt install -y mutt ssmtp mairix
 }
