@@ -843,16 +843,23 @@ RemoveFirefoxLatest() {
 }
 
 InstallOpera() {
-    echo 'deb https://deb.opera.com/opera-stable/ stable non-free' > /etc/apt/source.list.d/opera-stable.list
-    wget -qO - https://deb.opera.com/archive.key | apt-key add -
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+
+    wget --quiet https://deb.opera.com/archive.key -O /etc/apt/keyrings/opera.gpg
+    echo 'deb [signed-by=/etc/apt/keyrings/opera.gpg] https://deb.opera.com/opera-stable/ stable non-free' > /etc/apt/source.list.d/opera.list
     apt update
     apt install -y opera-stable
 }
 
 RemoveOpera() {
     apt remove -y opera-stable
-    if [ -f /etc/apt/sources.list.d/opera-stable.list ]; then
-        rm /etc/apt/sources.list.d/opera-stable.list
+    if [ -f /etc/apt/keyrings/opera.gpg ]; then
+        rm /etc/apt/keyrings/opera.gpg
+    fi
+    if [ -f /etc/apt/sources.list.d/opera.list ]; then
+        rm /etc/apt/sources.list.d/opera.list
     fi
 }
 
@@ -860,18 +867,26 @@ InstallVivaldi() {
     # Install prerequisites
     apt install -y libappindicator3-1 libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7
 
-    echo 'deb http://repo.vivaldi.com/stable/deb/ stable main' > /etc/apt/sources.list.d/vivaldi.list
-    wget -qO - https://repo.vivaldi.com/stable/linux_signing_key.pub | apt-key add -
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+
+    wget --quiet https://repo.vivaldi.com/stable/linux_signing_key.pub -O /etc/apt/keyrings/vivaldi.gpg
+    echo 'deb [signed-by=/etc/apt/keyrings/vivaldi.gpg] http://repo.vivaldi.com/stable/deb/ stable main' > /etc/apt/sources.list.d/vivaldi.list
     apt update
     apt install -y vivaldi-stable
 }
 
 RemoveVivaldi() {
     apt remove -y vivaldi-stable
+    if [ -f /etc/apt/keyrings/vivaldi.gpg ]; then
+        rm /etc/apt/keyrings/vivaldi.gpg
+    fi
     if [ -f /etc/apt/sources.list.d/vivaldi.list ]; then
         rm /etc/apt/sources.list.d/vivaldi.list
     fi
 }
+
 
 ################################################################
 ###### Multimedia ###
