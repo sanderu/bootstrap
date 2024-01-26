@@ -481,11 +481,15 @@ RemoveHexEditor() {
 ################################################################
 
 InstallVisualStudioCode() {
-    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
-        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
     fi
-    echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
+
+    if [ ! -f /etc/apt/keyrings/microsoft.gpg ]; then
+        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/microsoft.gpg
+        chmod 644 /etc/apt/keyrings/microsoft.gpg
+    fi
+    echo 'deb [signed-by=/etc/apt/keyrings/microsoft.gpg arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
 
     #Then update the package cache and install the package using:
     apt update
@@ -494,7 +498,12 @@ InstallVisualStudioCode() {
 
 RemoveVisualStudioCode() {
     apt remove -y code
-    rm /etc/apt/sources.list.d/vscode.list
+    if [ -f /etc/apt/keyrings/microsoft.gpg ]; then
+        rm /etc/apt/keyrings/microsoft.gpg
+    fi
+    if [ -f /etc/apt/sources.list.d/vscode.list ]; then
+        rm /etc/apt/sources.list.d/vscode.list
+    fi
 }
 
 ################################################################
