@@ -893,11 +893,17 @@ RemoveVivaldi() {
 ################################################################
 
 InstallSpotifyClient() {
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
     # Install Spotify gpg-key
     wget https://www.spotify.com/us/download/linux/ -O /tmp/spotify_dl_site.html
     APTKEY=$( awk -F 'curl -sS ' '{print $2}' /tmp/spotify_dl_site.html | awk -F '|' '{print $1}' | grep -v ^$ )
-    curl -sS ${APTKEY} | apt-key add -
-    echo 'deb http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list
+    cd /tmp/
+    wget --quiet ${APTKEY} -O /tmp/spotify.key
+    gpg --no-default-keyring --keyring /tmp/temp-keyring.gpg --import /tmp/spotify.key 
+    gpg --no-default-keyring --keyring /tmp/temp-keyring.gpg --export --output /etc/apt/keyrings/spotify.gpg
+    echo 'deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list
 
     # Install Spotify client
     apt update
@@ -906,15 +912,14 @@ InstallSpotifyClient() {
 
 RemoveSpotifyClient() {
     # remove Spotify client
+    apt remove -y spotify-client
     SPOTIFYREPO=/etc/apt/sources.list.d/spotify.list
+    if [ -f /etc/apt/keyrings/spotify.gpg ]; then
+        rm /etc/apt/keyrings/spotify.gpg
+    fi
     if [ -f ${SPOTIFYREPO} ]; then
         rm ${SPOTIFYREPO}
     fi
-    APTKEY=$( apt-key list --fingerprint spotify.com | grep -A1 pub | tail -n1 | awk '{print $(NF-1)$(NF)}' )
-    if [ ! -z ${APTKEY} ]; then
-        apt-key del ${APTKEY}
-    fi
-    apt remove -y spotify-client
 }
 
 InstallVLCPlayer() {
