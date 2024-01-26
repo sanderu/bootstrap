@@ -1070,12 +1070,17 @@ RemoveVMwareWorkstation() {
 }
 
 InstallPowerShell() {
-    if [ ! -f /etc/apt/trusted.gpg.d/microsoft.gpg ]; then
-        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-        chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+    if [ ! -f /etc/apt/keyrings/microsoft.gpg ]; then
+        curl -sS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/microsoft.gpg
+        chmod 644 /etc/apt/keyrings/microsoft.gpg
     fi
     DEBVERSIONNAME=$( grep VERSION_CODENAME /etc/os-release | awk -F '=' '{print $2}' )
-    echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-${DEBVERSIONNAME}-prod ${DEBVERSIONNAME} main" > /etc/apt/sources.list.d/powershell.list
+    echo "deb [signed-by=/etc/apt/keyrings/microsoft.gpg arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-${DEBVERSIONNAME}-prod ${DEBVERSIONNAME} main" > /etc/apt/sources.list.d/powershell.list
+    # Known latest Debian release that actually has Powershell packages (just as a seatbelt for being able to install it)
+    echo "deb [signed-by=/etc/apt/keyrings/microsoft.gpg arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" >> /etc/apt/sources.list.d/powershell.list
 
     apt update
     apt install -y powershell
@@ -1083,7 +1088,12 @@ InstallPowerShell() {
 
 RemovePowerShell() {
     apt remove -y powershell
-    rm /etc/apt/sources.list.d/powershell.list
+    if [ -f /etc/apt/keyrings/microsoft.gpg ]; then
+        rm /etc/apt/keyrings/microsoft.gpg
+    fi
+    if [ -f /etc/apt/sources.list.d/powershell.list]; then
+        rm /etc/apt/sources.list.d/powershell.list
+    fi
 }
 
 
