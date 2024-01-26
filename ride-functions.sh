@@ -75,34 +75,56 @@ RemoveI3() {
 ############################
 
 InstallPostgreSQLServer() {
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
-    wget --quiet -O - ${PGDG_KEY} | apt-key add -
+    wget --quiet ${PGDG_KEY} -O /tmp/postgres.gpg
+    cd /tmp
+    gpg --no-default-keyring --keyring ./temp-keyring.gpg --import postgres.gpg
+    gpg --no-default-keyring --keyring ./temp-keyring.gpg --export --output /etc/apt/keyrings/postgresql.gpg
+
+    echo "deb [signed-by=/etc/apt/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+
     apt update
     apt install -y postgresql-16
 }
 
 RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
-    apt-key del ACCC4CF8
     apt remove -y postgresql-16
+    if [ -f /etc/apt/keyrings/postgresql.gpg ]; then
+        rm /etc/apt/keyrings/postgresql.gpg
+    fi
     if [ -f ${PGDG} ]; then
        rm ${PGDG}
     fi
 }
 
 InstallPostgreSQLClient() {
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+
     PGDG_KEY=$( wget --quiet -O - https://www.postgresql.org/download/linux/debian/ | grep 'media/keys' | awk '{print $5}' )
-    wget --quiet -O - ${PGDG_KEY} | apt-key add -
+    wget --quiet ${PGDG_KEY} -O /tmp/postgres.gpg
+    cd /tmp
+    gpg --no-default-keyring --keyring ./temp-keyring.gpg --import postgres.gpg
+    gpg --no-default-keyring --keyring ./temp-keyring.gpg --export --output /etc/apt/keyrings/postgresql.gpg
+
+    echo "deb [signed-by=/etc/apt/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+
     apt update
     apt install -y postgresql-client-16
 }
 
 RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
-    apt-key del ACCC4CF8
     apt remove -y postgresql-client-16
+    if [ -f /etc/apt/keyrings/postgresql.gpg ]; then
+        rm /etc/apt/keyrings/postgresql.gpg
+    fi
     if [ -f ${PGDG} ]; then
         rm ${PGDG}
     fi
