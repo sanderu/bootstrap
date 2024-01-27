@@ -348,6 +348,39 @@ RemoveGhidra() {
     fi
 }
 
+InstallCutter() {
+    # Installing prerequisites
+    apt install -y build-essential cmake meson pkg-config libzip-dev zlib1g-dev libqt5svg5-dev qttools5-dev qttools5-dev-tools libkf5syntaxhighlighting-dev libgraphviz-dev
+    # when building with CUTTER_ENABLE_PYTHON_BINDINGS - this however, continuously failed for me so I'm excluding it
+    # apt install -y libshiboken2-dev libpyside2-dev  qtdeclarative5-dev
+    # for Python bindings: cmake -DCUTTER_ENABLE_PYTHON=TRUE -DCUTTER_ENABLE_PYTHON_BINDINGS=/usr/bin/python -DCUTTER_ENABLE_GRAPHVIZ=TRUE -DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=TRUE ..
+
+    # Get latest cutter version
+    wget https://github.com/rizinorg/cutter/releases/latest -O /tmp/cutter.html
+    LATEST_VERS=$( grep Release /tmp/cutter.html | awk -F '<title>Release ' '{print $2}'  | awk -F ' · rizinorg/cutter' '{print $1}' | grep -v ^$ )
+    wget https://github.com/rizinorg/cutter/releases/download/v${LATEST_VERS}/Cutter-v${LATEST_VERS}-src.tar.gz -O ${DOWNLOADDIR}/cutter.tar.gz
+
+    cd ${DOWNLOADDIR}
+    tar -xzvf cutter.tar.gz
+
+    # Build from source
+    cd ${DOWNLOADDIR}/Cutter-v${LATEST_VERS}
+    mkdir build
+    cd build/
+    cmake -DCUTTER_ENABLE_GRAPHVIZ=TRUE -DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=TRUE ..
+    cmake --build .
+    cmake --install .
+}
+
+RemoveCutter() {
+    if [ -f /usr/local/bin/cutter]; then
+        rm /usr/local/bin/cutter
+    fi
+    if [ -d /usr/local/lib ]; then
+        rm -f /usr/local/lib/librz_*
+    fi
+}
+
 InstallRadare2() {
     # Install radare2 - reverse engineering framework
     BASEURL='https://github.com/radareorg/radare2/releases'
