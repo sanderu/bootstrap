@@ -315,6 +315,31 @@ RemoveVolatility3() {
     fi
 }
 
+InstallUAC() {
+    wget https://github.com/tclahr/uac/releases/latest -O /tmp/uac_latest.html
+    LATEST_VERS=$( awk -F '<title>Release ' '{print $2}' /tmp/uac_latest.html | awk -F ' · tclahr/uac' '{print $1}' | grep -v ^$ )
+    VERSION=$( awk -F 'uac-' '{print $2}' )
+    wget https://github.com/tclahr/uac/releases/download/v${VERSION}/${LATEST_VERS}.tar.gz -O ${DOWNLOADDIR}/uac.tar.gz
+    wget https://github.com/tclahr/uac/releases/download/v${VERSION}/${LATEST_VERS}.tar.gz.sha256 -O ${DOWNLOADDIR}/uac.tar.gz.sha256
+    CHECKSUM=$( awk '{print $1$2}' ${DOWNLOADDIR}/uac.tar.gz.sha256 )
+    CHECK_TARBALL=$( sha256sum ${DOWNLOADDIR}/uac.tar.gz | awk '{print $1$2}' )
+    if [ x${CHECKSUM} == x${CHECK_TARBALL} ]; then
+        cd ${MYUSERDIR}
+        tar -xzvf uac.tar.gz
+        mv ${LATEST_VERS} uac
+        chown -R ${MYUSER}:${MYUSER} ${MYUSERDIR}/uac
+    else
+        echo 'UAC tarball checksum does not match UAC project provided checksum.'
+        exit 1
+    fi
+}
+
+RemoveUAC() {
+    if [ -d ${MYUSERDIR}/uac ]; then
+        rm -rf ${MYUSERDIR}/uac
+    fi
+}
+
 #################################
 ### Reverse Engineering tools ###
 #################################

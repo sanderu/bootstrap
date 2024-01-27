@@ -24,6 +24,7 @@ InstallAwesome                  #RemoveAwesome
 #InstallWindowsForensicTools    #RemoveWindowsForensicTools
 #InstallBMCTools                #RemoveBMCTools
 #InstallVolatility3             #RemoveVolatility3
+#InstallUAC                     #RemoveUAC
 
 ### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
