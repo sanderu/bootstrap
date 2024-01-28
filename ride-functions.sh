@@ -640,11 +640,11 @@ DisableMulticastDNS() {
 }
 
 InstallNetworkTools() {
-    apt install -y tcpdump wireshark nmap macchanger flow-tools tcpreplay
+    apt install -y tcpdump wireshark nmap macchanger tcpreplay
 }
 
 RemoveNetworkTools() {
-    apt remove -y tcpdump wireshark nmap macchanger flow-tools tcpreplay
+    apt remove -y tcpdump wireshark nmap macchanger tcpreplay
 }
 
 InstallNetCommsTools() {
