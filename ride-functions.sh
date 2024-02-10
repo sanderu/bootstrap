@@ -473,7 +473,7 @@ RemoveCutter() {
 
 InstallMalcat() {
     # Installing prerequisites
-    apt install -y wget unzip pip
+    apt install -y wget unzip pip python3-tabulate python3-ruamel.yaml
 
     # Get latest malcat version
     wget https://malcat.fr/latest/malcat_bookworm_lite.zip -O ${DOWNLOADDIR}/malcat.zip
