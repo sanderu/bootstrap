@@ -8,6 +8,15 @@ InstallXscreensaver             #RemoveXscreensaver
 InstallAwesome                  #RemoveAwesome
 #InstallI3                       #RemoveI3
 
+### Basic Tools and support ###
+InstallExfatSupport             #RemoveExfatSupport
+InstallPackagingTools           #RemovePackagingTools
+InstallBasicEditor              #RemoveBasicEditor
+InstallPythonTools              #RemovePythonTools
+InstallTerminator               #RemoveTerminator
+InstallLess                     #RemoveLess
+InstallHexEditor                #RemoveHexEditor
+
 ### Database ###
 #InstallPostgreSQLServer        #RemovePostgreSQLServer
 #InstallPostgreSQLClient        #RemovePostgreSQLClient
@@ -36,15 +45,6 @@ InstallAwesome                  #RemoveAwesome
 
 ### CTF / Pentest tools ###
 #InstallBurp                     #RemoveBurp
-
-### Basic Tools and support ###
-InstallExfatSupport             #RemoveExfatSupport
-InstallPackagingTools           #RemovePackagingTools
-InstallBasicEditor              #RemoveBasicEditor
-InstallPythonTools              #RemovePythonTools
-InstallTerminator               #RemoveTerminator
-InstallLess                     #RemoveLess
-InstallHexEditor                #RemoveHexEditor
 
 ### Programming Tools ###
 #InstallVisualStudioCode        #RemoveVisualStudioCode

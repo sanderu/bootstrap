@@ -70,6 +70,71 @@ RemoveI3() {
     apt remove -y i3-wm i3lock i3status
 }
 
+
+###############################
+### Basic Tools and support ###
+###############################
+
+InstallExfatSupport() {
+    apt install -y exfat-fuse exfatprogs
+}
+
+RemoveExfatSupport() {
+    apt remove -y exfat-fuse exfatprogs
+}
+
+InstallPackagingTools() {
+    apt install -y p7zip-full unrar
+}
+
+RemovePackagingTools() {
+    apt remove -y p7zip-full unrar
+}
+
+InstallBasicEditor() {
+    apt install -y vim
+    update-alternatives --set editor '/usr/bin/vim.basic'
+    sed -i 's/"syntax on/syntax on/' /etc/vim/vimrc
+    sed -i 's/"set background=dark/set background=dark/' /etc/vim/vimrc
+}
+
+RemoveBasicEditor() {
+    apt remove -y vim
+}
+
+InstallPythonTools() {
+    apt install -y python3-pip python3-virtualenv
+}
+
+RemovePythonTools() {
+    apt remove -y python3-pip python3-virtualenv
+}
+
+InstallTerminator() {
+    apt install -y terminator
+}
+
+RemoveTerminator() {
+    apt remove -y terminator
+}
+
+InstallLess() {
+    apt install -y less
+}
+
+RemoveLess() {
+    apt remove -y less
+}
+
+InstallHexEditor() {
+    apt install -y dhex hexer wxhexeditor
+}
+
+RemoveHexEditor() {
+    apt remove -y dhex hexer wxhexeditor
+}
+
+
 ############################
 ### Database ###
 ############################
@@ -515,70 +580,6 @@ RemoveBurp() {
 }
 
 
-###############################
-### Basic Tools and support ###
-###############################
-
-InstallExfatSupport() {
-    apt install -y exfat-fuse exfatprogs
-}
-
-RemoveExfatSupport() {
-    apt remove -y exfat-fuse exfatprogs
-}
-
-InstallPackagingTools() {
-    apt install -y p7zip-full unrar
-}
-
-RemovePackagingTools() {
-    apt remove -y p7zip-full unrar
-}
-
-InstallBasicEditor() {
-    apt install -y vim
-    update-alternatives --set editor '/usr/bin/vim.basic'
-    sed -i 's/"syntax on/syntax on/' /etc/vim/vimrc
-    sed -i 's/"set background=dark/set background=dark/' /etc/vim/vimrc
-}
-
-RemoveBasicEditor() {
-    apt remove -y vim
-}
-
-InstallPythonTools() {
-    apt install -y python3-pip python3-virtualenv
-}
-
-RemovePythonTools() {
-    apt remove -y python3-pip python3-virtualenv
-}
-
-InstallTerminator() {
-    apt install -y terminator
-}
-
-RemoveTerminator() {
-    apt remove -y terminator
-}
-
-InstallLess() {
-    apt install -y less
-}
-
-RemoveLess() {
-    apt remove -y less
-}
-
-InstallHexEditor() {
-    apt install -y dhex hexer wxhexeditor
-}
-
-RemoveHexEditor() {
-    apt remove -y dhex hexer wxhexeditor
-}
-
-
 ################################################################
 ### Programming Tools ###
 ################################################################
@@ -609,6 +610,7 @@ RemoveVisualStudioCode() {
     fi
 }
 
+
 ################################################################
 ### Communication ###
 ################################################################
@@ -628,6 +630,7 @@ InstallEmailProgs() {
 RemoveEmailProgs() {
     apt remove -y mutt ssmtp mairix
 }
+
 
 ################################################################
 ### NetworkConfiguration ###
@@ -762,6 +765,7 @@ InstallJupyter() {
 RemoveJupyter() {
     apt remove -y jupyter-notebook markdown
 }
+
 
 ################################################################
 ### Supporting scripts ###
@@ -1063,6 +1067,7 @@ InstallHandBrake() {
 RemoveHandBrake() {
     apt remove -y handbrake-cli
 }
+
 
 ################################################################
 ### Miscellaneous tweaks and installs  ###
