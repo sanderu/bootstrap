@@ -29,6 +29,7 @@ InstallAwesome                  #RemoveAwesome
 ### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
 #InstallCutter                  #RemoveCutter
+#InstallMalcat                  #RemoveMalcat
 #InstallRadare2                 #RemoveRadare2
 #InstallIaito                   #RemoveIaito
 #InstallEDBDebugger             #RemoveEDBDebugger

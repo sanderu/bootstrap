@@ -375,7 +375,7 @@ RemoveGhidra() {
 
 InstallCutter() {
     # Installing prerequisites
-    apt install -y build-essential cmake meson pkg-config libzip-dev zlib1g-dev libqt5svg5-dev qttools5-dev qttools5-dev-tools libkf5syntaxhighlighting-dev libgraphviz-dev
+    apt install -y build-essential cmake meson pkg-config libzip-dev zlib1g-dev libqt5svg5-dev qttools5-dev qttools5-dev-tools libkf5syntaxhighlighting-dev libgraphviz-dev wget
     # when building with CUTTER_ENABLE_PYTHON_BINDINGS - this however, continuously failed for me so I'm excluding it
     # apt install -y libshiboken2-dev libpyside2-dev  qtdeclarative5-dev
     # for Python bindings: cmake -DCUTTER_ENABLE_PYTHON=TRUE -DCUTTER_ENABLE_PYTHON_BINDINGS=/usr/bin/python -DCUTTER_ENABLE_GRAPHVIZ=TRUE -DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=TRUE ..
@@ -404,6 +404,29 @@ RemoveCutter() {
     if [ -d /usr/local/lib ]; then
         rm -f /usr/local/lib/librz_*
     fi
+}
+
+InstallMalcat() {
+    # Installing prerequisites
+    apt install -y wget unzip pip
+
+    # Get latest malcat version
+    wget https://malcat.fr/latest/malcat_bookworm_lite.zip -O ${DOWNLOADDIR}/malcat.zip
+
+    if [ ! -d ${MYUSERDIR}/malcat ]; then
+        mkdir ${MYUSERDIR}/malcat
+    else
+        rm -rf ${MYUSERDIR}/malcat
+        mkdir ${MYUSERDIR}/malcat
+    fi
+    cd ${MYUSERDIR}/malcat
+    unzip ${DOWNLOADDIR}/malcat.zip
+    ln -s ${MYUSERDIR}/malcat/bin/malcat ${MYUSERDIR}/bin/malcat
+    pip install -r requirements.txt
+}
+
+RemoveMalcat() {
+    rm -rf ${MYUSERDIR}/malcat
 }
 
 InstallRadare2() {
