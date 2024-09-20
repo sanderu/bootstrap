@@ -1,6 +1,7 @@
 ### Generic Debian ###
 UpdateDebian
 InstallRequired
+InstallChipDependant
 InstallShellTools               #RemoveShellTools
 #InstallKernelTools              #RemoveKernelTools
 InstallXserver                  #RemoveXserver
