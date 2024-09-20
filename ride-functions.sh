@@ -20,7 +20,17 @@ UpdateDebian() {
 }
 
 InstallRequired() {
-    apt install -y bash-completion coreutils git gnupg python3 tar wget apt-transport-https net-tools
+    apt install -y bash-completion coreutils git gnupg python3 tar wget apt-transport-https net-tools pciutils
+}
+
+InstallChipDependant() {
+    CPUINFO=$( cat /proc/cpuinfo | grep 'model name' | sort | uniq )
+    CHIPSET=$( echo ${CPUINFO} | awk '{print $4}' )
+    if [ x"${CHIPSET}" == "xAMD" ]; then
+        apt install -y amd-microcode firmware-amd
+    else
+        apt install -y intel-microcode
+    fi
 }
 
 InstallShellTools() {
@@ -40,11 +50,28 @@ RemoveKernelTools() {
 }
 
 InstallXserver() {
-    apt install -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    CPUINFO=$( cat /proc/cpuinfo | grep 'model name' | sort | uniq )
+    CHIPSET=$( echo ${CPUINFO} | awk '{print $4}' )
+    if [ x"${CHIPSET}" == "xAMD" ]; then
+        apt install -y firmware-amd-graphics
+        XORGVIDEO='xserver-xorg-video-amdgpu'
+    else
+        XORGVIDEO='xserver-xorg-video-intel'
+    fi
+
+    apt install -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
 }
 
 RemoveXserver() {
-    apt remove -y xserver-xorg-video-intel xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    CPUINFO=$( cat /proc/cpuinfo | grep 'model name' | sort | uniq )
+    CHIPSET=$( echo ${CPUINFO} | awk '{print $4}' )
+    if [ x"${CHIPSET}" == "xAMD" ]; then
+        apt install -y firmware-amd-graphics
+        XORGVIDEO='xserver-xorg-video-amdgpu'
+    else
+        XORGVIDEO='xserver-xorg-video-intel'
+    fi
+    apt remove -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
 }
 
 InstallXscreensaver() {
