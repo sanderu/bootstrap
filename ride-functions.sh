@@ -66,7 +66,7 @@ RemoveXserver() {
     CPUINFO=$( cat /proc/cpuinfo | grep 'model name' | sort | uniq )
     CHIPSET=$( echo ${CPUINFO} | awk '{print $4}' )
     if [ x"${CHIPSET}" == "xAMD" ]; then
-        apt install -y firmware-amd-graphics
+        apt remove -y firmware-amd-graphics
         XORGVIDEO='xserver-xorg-video-amdgpu'
     else
         XORGVIDEO='xserver-xorg-video-intel'
