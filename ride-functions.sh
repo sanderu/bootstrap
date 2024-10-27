@@ -1238,6 +1238,14 @@ RemoveClamAV() {
     apt remove -y clamav
 }
 
+InstallRootkitCheckers() {
+    apt install -y chkrootkit rkhunter unhide
+}
+
+RemoveRootkitCheckers() {
+    apt remove -y chkrootkit rkhunter unhide
+}
+
 InstallLynis() {
     apt install -y lynis
 }

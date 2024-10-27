@@ -106,6 +106,7 @@ SetFirefoxESRPreferences        #UnsetFirefoxESRPreferences
 InstallKeepassXC                #RemoveKeepassXC
 #InstallAIDE                    #RemoveAIDE
 #InstallClamAV                  #RemoveClamAV
+#InstallRootkitCheckers         #RemoveRootkitCheckers
 #InstallLynis                   #RemoveLynis
 InstallAuditd                   #RemoveAuditd
 #InstallSELinux                 #RemoveSELinux
