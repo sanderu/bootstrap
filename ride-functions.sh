@@ -432,6 +432,20 @@ RemoveUAC() {
     fi
 }
 
+InstallRegistrySpy() {
+    wget hhttps://github.com/andyjsmith/Registry-Spy/releases/latest -O /tmp/regspy_latest.html
+    LATEST_VERS=$( awk -F '<title>Release ' '{print $2}' /tmp/regspy_latest.html | awk -F ' · andyjsmith/Registry-Spy' '{print $1}' | grep -v ^$ )
+    VERSION=$( echo ${LATEST_VERS} | cut -f2 -d 'v' )
+    wget https://github.com/andyjsmith/Registry-Spy/releases/download/${LATEST_VERS}/registryspy_${VERSION}_linux_portable -O /usr/local/bin/registryspy
+    chmod +x /usr/local/bin/registryspy
+}
+
+RemoveRegistrySpy() {
+    if [ -f /usr/local/bin/registryspy ]; then
+        rm -rf /usr/local/bin/registryspy
+    fi
+}
+
 #################################
 ### Reverse Engineering tools ###
 #################################

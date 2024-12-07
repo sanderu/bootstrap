@@ -35,6 +35,7 @@ InstallHexEditor                #RemoveHexEditor
 #InstallBMCTools                #RemoveBMCTools
 #InstallVolatility3             #RemoveVolatility3
 #InstallUAC                     #RemoveUAC
+#InstallRegistrySpy             #RemoveRegistrySpy
 
 ### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
