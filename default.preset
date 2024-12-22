@@ -47,6 +47,7 @@ InstallHexEditor                #RemoveHexEditor
 
 ### CTF / Pentest tools ###
 #InstallBurp                     #RemoveBurp
+#InstallStegSeek                #RemoveStegSeek
 
 ### Programming Tools ###
 #InstallVisualStudioCode        #RemoveVisualStudioCode

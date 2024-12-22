@@ -620,6 +620,19 @@ RemoveBurp() {
     fi
 }
 
+InstallStegSeek() {
+    if [ ! -f /usr/local/bin/stegseek ]; then
+        # Get latest cutter version
+        wget https://github.com/RickdeJager/stegseek/releases/latest -O /tmp/stegseek.html
+        LATEST_VERS=$( awk -F 'app-argument=' '{print $2}' /tmp/stegseek.html | awk -F '"' '{print $1}' | grep -v ^$ | awk -F 'tag/v' '{print $2}' )
+        wget https://github.com/RickdeJager/stegseek/releases/download/v${LATEST_VERS}/stegseek_${LATEST_VERS}-1.deb -O ${DOWNLOADDIR}/stegseek.deb
+        dpkg -i ${DOWNLOADDIR}/stegseek.deb
+    fi
+}
+
+RemoveStegSeek() {
+    apt remove -y stegseek
+}
 
 ################################################################
 ### Programming Tools ###
