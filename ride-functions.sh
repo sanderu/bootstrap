@@ -161,6 +161,17 @@ RemoveHexEditor() {
     apt remove -y dhex hexer wxhexeditor
 }
 
+InstallHexwalk() {
+    echo "deb http://deb.debian.org/debian bookworm-backports main" > /etc/apt/sources.list.d/debian-backports.list
+    apt update
+    apt install -y hexwalk
+    sed -i 's/^deb/#deb/g' /etc/apt/sources.list.d/debian-backports.list
+}
+
+RemoveHexwalk() {
+    apt remove -y hexwalk
+}
+
 
 ############################
 ### Database ###

@@ -16,7 +16,8 @@ InstallBasicEditor              #RemoveBasicEditor
 InstallPythonTools              #RemovePythonTools
 InstallTerminator               #RemoveTerminator
 InstallLess                     #RemoveLess
-InstallHexEditor                #RemoveHexEditor
+#InstallHexEditor                #RemoveHexEditor
+InstallHexwalk                  #RemoveHexwalk
 
 ### Database ###
 #InstallPostgreSQLServer        #RemovePostgreSQLServer
