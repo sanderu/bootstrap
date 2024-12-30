@@ -608,6 +608,39 @@ RemoveEDBDebugger() {
     rmdir /usr/local/lib/edb
 }
 
+InstallCapa() {
+#https://github.com/mandiant/capa/releases/tag/v8.0.1 (latest)
+#https://github.com/mandiant/capa/releases/download/v8.0.1/capa-v8.0.1-linux.zip
+    wget https://github.com/mandiant/capa/releases/latest -O /tmp/capa.html
+    LATEST_VERS=$( grep Release /tmp/capa.html | awk -F '<title>Release ' '{print $2}'  | awk -F ' · mandiant/capa' '{print $1}' | grep -v ^$ )
+    wget https://github.com/mandiant/capa/releases/download/${LATEST_VERS}/capa-${LATEST_VERS}-linux.zip -O ${DOWNLOADDIR}/capa.zip
+
+    cd ${MYUSERDIR}/bin/
+    unzip ${DOWNLOADDIR}/capa.zip
+}
+
+RemoveCapa() {
+    if [ -f ${MYUSERDIR}/bin/capa ]; then
+        rm ${MYUSERDIR}/bin/capa
+    fi
+}
+
+InstallFLOSS() {
+#https://github.com/mandiant/flare-floss/releases/tag/v3.1.1 (latest)
+#https://github.com/mandiant/flare-floss/releases/download/v3.1.1/floss-v3.1.1-linux.zip
+    wget https://github.com/mandiant/flare-floss/releases/latest -O /tmp/floss.html
+    LATEST_VERS=$( grep Release /tmp/floss.html | awk -F '<title>Release ' '{print $2}'  | awk -F ' · mandiant/flare-floss' '{print $1}' | grep -v ^$ )
+    wget https://github.com/mandiant/flare-floss/releases/download/${LATEST_VERS}/floss-${LATEST_VERS}-linux.zip -O ${DOWNLOADDIR}/floss.zip
+
+    cd ${MYUSERDIR}/bin/
+    unzip ${DOWNLOADDIR}/floss.zip
+}
+
+RemoveFLOSS() {
+    if [ -f ${MYUSERDIR}/bin/floss ]; then
+        rm ${MYUSERDIR}/bin/floss
+    fi
+}
 
 ###########################
 ### CTF / Pentest tools ###

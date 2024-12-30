@@ -45,6 +45,8 @@ InstallHexwalk                  #RemoveHexwalk
 #InstallRadare2                 #RemoveRadare2
 #InstallIaito                   #RemoveIaito
 #InstallEDBDebugger             #RemoveEDBDebugger
+#InstallCapa                    #RemoveCapa
+#InstallFLOSS                   #RemoveFLOSS
 
 ### CTF / Pentest tools ###
 #InstallBurp                     #RemoveBurp
