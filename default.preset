@@ -57,6 +57,7 @@ InstallHexwalk                  #RemoveHexwalk
 
 ### Communication ###
 #InstallChatProgs               #RemoveChatProgs
+#InstallSignal                  #RemoveSignal
 #InstallEmailProgs              #RemoveEmailProgs
 
 ### NetworkConfiguration ###

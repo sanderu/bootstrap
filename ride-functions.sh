@@ -721,6 +721,27 @@ RemoveChatProgs() {
     apt remove -y hexchat hexchat-otr finch pidgin pidgin-otr
 }
 
+InstallSignal() {
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+    fi
+
+    apt install -y gnupg
+    # 1. Install our official public software signing key:
+    wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > /etc/apt/keyrings/signal-desktop-keyring.gpg
+
+    # 2. Add our repository to your list of repositories:
+    echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' > /etc/apt/sources.list.d/signal-desktop.list
+
+    # 3. Update your package database and install Signal:
+    apt update
+    apt install -y signal-desktop
+}
+
+RemoveSignal() {
+    apt remove -y signal-desktop
+}
+
 InstallEmailProgs() {
     apt install -y mutt ssmtp mairix
 }
