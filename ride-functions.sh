@@ -742,6 +742,22 @@ RemoveSignal() {
     apt remove -y signal-desktop
 }
 
+InstallSlack() {
+    #https://slack.com/release-notes/linux -> 4.41.105
+    # slack-desktop-4.41.105-amd64.deb
+    #https://downloads.slack-edge.com/desktop-releases/linux/x64/4.41.105/slack-desktop-4.41.105-amd64.deb
+    #
+    LATEST=$( wget https://slack.com/release-notes/linux -O /tmp/slack-release.txt )
+    VERSION=$( grep -A1 'Close Release Notes' slack-releases.txt | tr '>' '\n' | grep -A1 'u-flex u-align--center' | head -n2 | tail -n1 | cut -f2 -d ' ' | cut -f1 -d '<' )
+
+    wget https://downloads.slack-edge.com/desktop-releases/linux/x64/${VERSION}/slack-desktop-${VERSION}-amd64.deb -O ${DOWNLOADDIR}/slack.deb
+    dpkg -i ${DOWNLOADDIR}/slack.deb
+}
+
+RemoveSlack() {
+    apt remove -y slack-desktop
+}
+
 InstallEmailProgs() {
     apt install -y mutt ssmtp mairix
 }
