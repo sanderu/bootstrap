@@ -18,6 +18,7 @@ InstallTerminator               #RemoveTerminator
 InstallLess                     #RemoveLess
 #InstallHexEditor                #RemoveHexEditor
 InstallHexwalk                  #RemoveHexwalk
+InstallImHex                    #RemoveImHex
 
 ### Database ###
 #InstallPostgreSQLServer        #RemovePostgreSQLServer

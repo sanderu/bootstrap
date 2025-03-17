@@ -172,6 +172,17 @@ RemoveHexwalk() {
     apt remove -y hexwalk
 }
 
+InstallImHex() {
+    wget https://github.com/WerWolv/ImHex/releases/latest -O /tmp/imhex.html
+    LATEST_VERS=$( grep opengraph /tmp/imhex.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
+    wget https://github.com/WerWolv/ImHex/releases/download/v${LATEST_VERS}/imhex-${LATEST_VERS}-x86_64.AppImage -O ${USERDIR}/bin/imhex.AppImage
+    chmod +x ${USERDIR}/bin/imhex.AppImage
+    chown ${MYUSER}:${MYUSER} ~/bin/imhex.AppImage
+}
+
+RemoveImHex() {
+    rm ~/bin/imhex.AppImage
+}
 
 ############################
 ### Database ###
