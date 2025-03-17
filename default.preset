@@ -38,6 +38,7 @@ InstallImHex                    #RemoveImHex
 #InstallVolatility3             #RemoveVolatility3
 #InstallUAC                     #RemoveUAC
 #InstallRegistrySpy             #RemoveRegistrySpy
+#InstallAuroraIR                #RemoveAuroraIR
 
 ### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
