@@ -173,6 +173,7 @@ RemoveHexwalk() {
 }
 
 InstallImHex() {
+    apt install -y xdg-desktop-portal-gtk
     wget https://github.com/WerWolv/ImHex/releases/latest -O /tmp/imhex.html
     LATEST_VERS=$( grep opengraph /tmp/imhex.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
     wget https://github.com/WerWolv/ImHex/releases/download/v${LATEST_VERS}/imhex-${LATEST_VERS}-x86_64.AppImage -O ${USERDIR}/bin/imhex.AppImage
