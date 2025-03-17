@@ -60,6 +60,7 @@ InstallImHex                    #RemoveImHex
 #InstallChatProgs               #RemoveChatProgs
 #InstallSignal                  #RemoveSignal
 #InstallSlack                   #RemoveSlack
+#InstallDiscord                 #RemoveDiscord
 #InstallEmailProgs              #RemoveEmailProgs
 
 ### NetworkConfiguration ###

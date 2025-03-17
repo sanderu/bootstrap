@@ -769,6 +769,15 @@ RemoveSlack() {
     apt remove -y slack-desktop
 }
 
+InstallDiscord() {
+    wget 'https://discord.com/api/download?platform=linux&format=deb' -O ${DOWNLOADDIR}/discord.deb
+    dpkg -i discord.deb
+}
+
+RemoveDiscord() {
+    apt remove -y discord
+}
+
 InstallEmailProgs() {
     apt install -y mutt ssmtp mairix
 }
