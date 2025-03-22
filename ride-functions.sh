@@ -27,7 +27,7 @@ InstallChipDependant() {
     CPUINFO=$( cat /proc/cpuinfo | grep 'model name' | sort | uniq )
     CHIPSET=$( echo ${CPUINFO} | awk '{print $4}' )
     if [ x"${CHIPSET}" == "xAMD" ]; then
-        apt install -y amd-microcode firmware-amd
+        apt install -y amd64-microcode firmware-amd-graphics
     else
         apt install -y intel-microcode
     fi
