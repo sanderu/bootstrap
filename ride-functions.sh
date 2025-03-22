@@ -176,13 +176,13 @@ InstallImHex() {
     apt install -y xdg-desktop-portal-gtk
     wget https://github.com/WerWolv/ImHex/releases/latest -O /tmp/imhex.html
     LATEST_VERS=$( grep opengraph /tmp/imhex.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
-    wget https://github.com/WerWolv/ImHex/releases/download/v${LATEST_VERS}/imhex-${LATEST_VERS}-x86_64.AppImage -O ${USERDIR}/bin/imhex.AppImage
-    chmod +x ${USERDIR}/bin/imhex.AppImage
-    chown ${MYUSER}:${MYUSER} ~/bin/imhex.AppImage
+    wget https://github.com/WerWolv/ImHex/releases/download/v${LATEST_VERS}/imhex-${LATEST_VERS}-x86_64.AppImage -O ${MYUSERDIR}/bin/imhex.AppImage
+    chmod +x ${MYUSERDIR}/bin/imhex.AppImage
+    chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/imhex.AppImage
 }
 
 RemoveImHex() {
-    rm ~/bin/imhex.AppImage
+    rm ${MYUSERDIR}/bin/imhex.AppImage
 }
 
 ############################
@@ -473,16 +473,16 @@ InstallAuroraIR() {
     wget https://github.com/cyb3rfox/Aurora-Incident-Response/releases/latest -O /tmp/aurora.html
     LATEST_VERS=$( grep opengraph /tmp/aurora.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
     wget https://github.com/cyb3rfox/Aurora-Incident-Response/releases/download/${LATEST_VERS}/Aurora-linux-x64-${LATEST_VERS}.zip -O ${DOWNLOADDIR}/aurora.zip
-    cd ${USERDIR}/bin
+    cd ${MYUSERDIR}/bin
     unzip ${DOWNLOADDIR}/aurora.zip
     ln -s Aurora-linux-x64/Aurora aurora
-    chmod +x ${USERDIR}/bin/imhex.AppImage
-    chown ${MYUSER}:${MYUSER} ~/bin/imhex.AppImage
+    chmod +x ${MYUSERDIR}/bin/imhex.AppImage
+    chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/imhex.AppImage
 }
 
 RemoteAuroraIR() {
-    rm ${USERDIR}/bin/aurora
-    rf -rf ${USERDIR}/bin/Aurora-linux-x64
+    rm ${MYUSERDIR}/bin/aurora
+    rf -rf ${MYUSERDIR}/bin/Aurora-linux-x64
 }
 
 
