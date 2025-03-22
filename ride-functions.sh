@@ -470,6 +470,7 @@ RemoveRegistrySpy() {
 }
 
 InstallAuroraIR() {
+    apt install -y libxss1
     wget https://github.com/cyb3rfox/Aurora-Incident-Response/releases/latest -O /tmp/aurora.html
     LATEST_VERS=$( grep opengraph /tmp/aurora.html  | awk -F 'tag/' '{print $2}' | cut -f1 -d '"' | head -n1 )
     wget https://github.com/cyb3rfox/Aurora-Incident-Response/releases/download/${LATEST_VERS}/Aurora-linux-x64-${LATEST_VERS}.zip -O ${DOWNLOADDIR}/aurora.zip
