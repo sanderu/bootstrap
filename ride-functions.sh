@@ -173,7 +173,7 @@ RemoveHexwalk() {
 }
 
 InstallImHex() {
-    apt install -y xdg-desktop-portal-gtk
+    apt install -y xdg-desktop-portal-gtk libfuse2
     wget https://github.com/WerWolv/ImHex/releases/latest -O /tmp/imhex.html
     LATEST_VERS=$( grep opengraph /tmp/imhex.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
     wget https://github.com/WerWolv/ImHex/releases/download/v${LATEST_VERS}/imhex-${LATEST_VERS}-x86_64.AppImage -O ${MYUSERDIR}/bin/imhex.AppImage
@@ -203,12 +203,12 @@ InstallPostgreSQLServer() {
     echo "deb [signed-by=/etc/apt/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 
     apt update
-    apt install -y postgresql-16
+    apt install -y postgresql-18
 }
 
 RemovePostgreSQLServer() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
-    apt remove -y postgresql-16
+    apt remove -y postgresql-18
     if [ -f /etc/apt/keyrings/postgresql.gpg ]; then
         rm /etc/apt/keyrings/postgresql.gpg
     fi
@@ -231,12 +231,12 @@ InstallPostgreSQLClient() {
     echo "deb [signed-by=/etc/apt/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ ${OSRELEASE}-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 
     apt update
-    apt install -y postgresql-client-16
+    apt install -y postgresql-client-18
 }
 
 RemovePostgreSQLClient() {
     PGDG='/etc/apt/sources.list.d/pgdg.list'
-    apt remove -y postgresql-client-16
+    apt remove -y postgresql-client-18
     if [ -f /etc/apt/keyrings/postgresql.gpg ]; then
         rm /etc/apt/keyrings/postgresql.gpg
     fi
