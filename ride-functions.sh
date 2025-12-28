@@ -1199,6 +1199,14 @@ RemoveAudaciousPlayer() {
     apt remove -y audacious
 }
 
+InstallAudacity() {
+    apt install -y audacity
+}
+
+RemoveAudacity() {
+    apt remove -y audacity
+}
+
 InstallClementinePlayer() {
     apt install -y clementine gstreamer-plugins-bad
 }
