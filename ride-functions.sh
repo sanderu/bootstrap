@@ -59,7 +59,7 @@ InstallXserver() {
         XORGVIDEO='xserver-xorg-video-intel'
     fi
 
-    apt install -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    apt install -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xterm xdm xinit
 }
 
 RemoveXserver() {
@@ -71,7 +71,7 @@ RemoveXserver() {
     else
         XORGVIDEO='xserver-xorg-video-intel'
     fi
-    apt remove -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xdm xinit
+    apt remove -y ${XORGVIDEO} xfonts-100dpi xfonts-75dpi xfonts-base xfonts-encodings xfonts-terminus xfonts-traditional xfonts-utils xterm xdm xinit
 }
 
 InstallXscreensaver() {
