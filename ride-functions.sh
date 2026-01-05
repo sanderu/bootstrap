@@ -1044,7 +1044,7 @@ pref("dom.event.clipboardevents.enabled", false);
 pref("extensions.pocket.enabled", false);' > ${FIREFOXPREFFILE}
 
     # Create the autoconfig.js file (enables preferences)
-    FIREFOXAUTOCONFIG=${FIREFOXINSTALLDIR}'/defaults/pref/autoconfig.js'
+    FIREFOXAUTOCONFIG=sup${FIREFOXINSTALLDIR}'/defaults/pref/autoconfig.js'
     echo 'pref("general.config.obscure_value", 0);
 pref("general.config.filename", "mozilla.cfg");' > ${FIREFOXAUTOCONFIG}
 
@@ -1090,19 +1090,19 @@ InstallFirefoxLatest() {
 
     # Create the sources file for Mozilla packages
     echo '
-    Types: deb
-    URIs: https://packages.mozilla.org/apt
-    Suites: mozilla
-    Components: main
-    Signed-By: /etc/apt/keyrings/packages.mozilla.org.asc
-    ' | sudo tee /etc/apt/sources.list.d/mozilla.sources
+Types: deb
+URIs: https://packages.mozilla.org/apt
+Suites: mozilla
+Components: main
+Signed-By: /etc/apt/keyrings/packages.mozilla.org.asc
+' | sudo tee /etc/apt/sources.list.d/mozilla.sources
 
     # Set preference for mozilla packages
     echo '
-    Package: *
-    Pin: origin packages.mozilla.org
-    Pin-Priority: 1000
-    ' | sudo tee /etc/apt/preferences.d/mozilla
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
 
     # Update and install firefox
     apt update
