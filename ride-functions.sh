@@ -1079,26 +1079,38 @@ UnsetFirefoxESRPreferences() {
 
 
 InstallFirefoxLatest() {
-    # Install latest Firefox browser
-    wget -O ${DOWNLOADDIR}/ff_ver.html https://www.mozilla.org/en-US/firefox/notes/
-    NEWEST_VER=$( grep '<title>' ${DOWNLOADDIR}/ff_ver.html | awk '{print $2}' | cut -f1 -d ',' )
-    if [ -f ${MYUSERDIR}/firefox/application.ini ]; then
-        CURRENT_VER=$( grep '^Version' ${MYUSERDIR}/firefox/application.ini | awk -F '=' '{print $2}' | cut -f 1 -d ',' )
-    else
-        CURRENT_VER='N/A'
+    # Check /etc/apt/keyrings directory exists
+    if [ ! -d /etc/apt/keyrings ]; then
+        mkdir /etc/apt/keyrings
+        chmod 0755 /etc/apt/keyrings
     fi
-    if [ x"${NEWEST_VER}" != x"${CURRENT_VER}" ]; then
-        FF_URL='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
-        OUTPUTFILE='/tmp/FF-latest.tar.bz2'
-        wget ${FF_URL} -O ${OUTPUTFILE}
-        su - ${MYUSER} sh -c "tar -xjvf ${OUTPUTFILE}"
-    fi
+
+    # Get the Mozilla gpg signing key
+    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+
+    # Create the sources file for Mozilla packages
+    echo '
+    Types: deb
+    URIs: https://packages.mozilla.org/apt
+    Suites: mozilla
+    Components: main
+    Signed-By: /etc/apt/keyrings/packages.mozilla.org.asc
+    ' | sudo tee /etc/apt/sources.list.d/mozilla.sources
+
+    # Set preference for mozilla packages
+    echo '
+    Package: *
+    Pin: origin packages.mozilla.org
+    Pin-Priority: 1000
+    ' | sudo tee /etc/apt/preferences.d/mozilla
+
+    # Update and install firefox
+    apt update
+    apt install -y firefox
 }
 
 RemoveFirefoxLatest() {
-    if [ -f ${MYUSERDIR}/firefox ]; then
-        rm -rf ${MYUSERDIR}/firefox
-    fi
+    apt remove -y firefox
 }
 
 InstallOpera() {
