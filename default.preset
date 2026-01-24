@@ -81,6 +81,7 @@ InstallSSHclient                #RemoveSSHclient
 #InstallWine                    #RemoveWine
 #InstallLibreOffice             #RemoveLibreOffice
 #InstallJupyter                 #RemoveJupyter
+#InstallObsidian		#RemoveObsidian
 
 ### Supporting scripts ###
 #InstallTecmintMonitorSh        #RemoveTecmintMonitorSh

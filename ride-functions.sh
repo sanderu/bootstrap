@@ -940,6 +940,20 @@ RemoveJupyter() {
     apt remove -y jupyter-notebook markdown
 }
 
+InstallObsidian() {
+    if [ ! -f /usr/bin/obsidian ]; then
+        # Get latest cutter version
+        wget https://github.com/obsidianmd/obsidian-releases/releases/latest -O /tmp/obsidian.html
+        LATEST_VERS=$( awk -F 'app-argument=' '{print $2}' /tmp/obsidian.html | awk -F '"' '{print $1}' | grep -v ^$ | awk -F 'tag/v' '{print $2}' )
+        wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${LATEST_VERS}/obsidian_${LATEST_VERS}_amd64.deb -O ${DOWNLOADDIR}/obsidian.deb
+        dpkg -i ${DOWNLOADDIR}/obsidian.deb
+    fi
+}
+
+RemoveObsidian() {
+    apt remove -y obsidian
+}
+
 
 ################################################################
 ### Supporting scripts ###
