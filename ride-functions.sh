@@ -1311,60 +1311,6 @@ RemoveVMtoolsOnVM() {
 ################################################################
 ### 3rd party applications ###
 ################################################################
-InstallVMwareWorkstation() {
-    # Starting with prerequisites
-    apt install -y linux-headers-amd64 libaio1 libpcsclite1 gcc make
-
-    # download and install vmware workstation
-    # if serialnumberfile is sourced with script, it can autoadd serial number
-    FAKE_USERAGENT='User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0'
-    VMWAREURL='https://www.vmware.com/go/getworkstation-linux'
-    BINARYURL=$( curl -I ${VMWAREURL} --user-agent "${FAKE_USERAGENT}" | grep Location | cut -d ' ' -f2 ) # Full URL to binary installer"
-    BINARYFILENAME="${BINARYURL##*/}" # Filename of binary installer
-    NEWESTVMWAREVERSION=$( echo ${BINARYURL} | cut -d '-' -f4 ) # In the format XX.XX.XX
-    MAJORVERSION=$( echo ${NEWESTVMWAREVERSION} | cut -d '.' -f1) # In the format XX
-    SERIAL="VMWARESERIAL${MAJORVERISION}"
-    CURRENTVERSION=''
-
-    if [ $( which vmware ) ]; then
-        CURRENTVERSION=$( vmware --version | awk '{print $3}' )
-    fi
-
-    if [ x${NEWESTVMWAREVERSION} != x${CURRENTVERSION} ]; then
-        cd ${DOWNLOADDIR}
-        wget --content-disposition -N -q --show-progress ${VMWAREURL} # Overwrite file, quiet
-        chmod +x ${BINARYFILENAME}
-        ./${BINARYFILENAME} --required --console --eulas-agreed #
-
-        # Add serial number to VMWare Workstation Pro if you have it
-        read -r -p "${1:-Do you have a serial number for VMWare Workstation Pro?  [y/n]} " -n 1  RESPONSE
-        if [[ ${RESPONSE} =~ ^[Yy]$ ]] ; then # if NOT yes then exit
-            read -r -p "${1:-Enter the serial number for VMware Workstation Pro now:} " -n 30  ASKSERIAL
-            if [[ ${ASKSERIAL} =~ ^[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}$ ]] ; then # if NOT yes then exit
-                SERIAL=${ASKSERIAL}
-            fi
-        fi
-        /usr/lib/vmware/bin/vmware-vmx --new-sn ${SERIAL}
-
-        # Compile all kernel modules and install
-        vmware-modconfig --console --install-all
-
-        # enable 3D acceleration in VMware Workstation
-        if [ ! -d ${MYUSERDIR}/.vmware ] ; then
-            mkdir ${MYUSERDIR}/.vmware
-            chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/.vmware
-        fi
-        su - ${MYUSER} sh -c "touch ${MYUSERDIR}/.vmware/preferences"
-        su - ${MYUSER} sh -c 'echo "mks.gl.allowBlacklistedDrivers = TRUE" >> '"${MYUSERDIR}/.vmware/preferences"
-    else
-        echo 'You already have the latest version installed.'
-    fi
-}
-
-RemoveVMwareWorkstation() {
-    vmware-installer --uninstall-product=vmware-workstation
-}
-
 InstallPowerShell() {
     if [ ! -d /etc/apt/keyrings ]; then
         mkdir /etc/apt/keyrings
