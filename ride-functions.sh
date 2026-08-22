@@ -258,28 +258,6 @@ RemoveForensicImageTools() {
     apt remove -y ewf-tools sleuthkit python3-tsk
 }
 
-InstallFTKImager() {
-    FTKURL='https://ad-zip.s3.amazonaws.com/ftkimager.3.1.1_ubuntu64.tar.gz'
-    FTKPKG=$( basename ${FTKURL} )
-    cd ${DOWNLOADDIR}
-    wget -q --show-progress ${FTKURL}
-    CHKSUM=$( md5sum ${FTKPKG} | awk '{print $1}' )
-    if [ x"${CHKSUM}" == x'a1eb0a4f1d09233a809b531519c8735f' ]; then
-        tar -xzvf ${FTKPKG} -C /usr/bin/
-        chmod +x /usr/bin/ftkimager
-    else
-        echo "FTKImager checksum does not match vendorprovided checksum."
-    fi
-    wget -q https://ad-pdf.s3.amazonaws.com/Imager%20Command%20Line%20Help.pdf -O ${MYUSERDIR}/Documents/
-}
-
-RemoveFTKImager() {
-    FTKIMAGER='/usr/bin/ftkimager'
-    if [ -f ${FTKIMAGER} ]; then
-        rm ${FTKIMAGER}
-    fi
-}
-
 InstallImagingTools() {
     apt install -y dc3dd dcfldd
 }
