@@ -464,6 +464,30 @@ RemoteAuroraIR() {
     rf -rf ${MYUSERDIR}/bin/Aurora-linux-x64
 }
 
+InstallKanvasIR() {
+	if [ ! -d ${MYUSERDIR}/Kanvas ]; then
+		apt install -y python3.13-venv python3-pyside6.qtwebenginewidgets
+        LATEST=$( wget https://github.com/WithSecureLabs/Kanvas/releases/latest -O /tmp/kanvas_latest.txt )
+        LATEST_VERS=$( grep '<title>Release' /tmp/kanvas_latest.txt | awk '{print $4}' )
+		wget https://github.com/WithSecureLabs/Kanvas/releases/download/v${LATEST_VERS}/release-${LATEST_VERS}.zip -O ${DOWNLOADDIR}/kanvas.zip
+		cd ${MYUSERDIR}
+		unzip ${DOWNLOADDIR}/kanvas.zip
+		mv ${MYUSERDIR}/release-${LATEST_VERS} ${MYUSERDIR}/Kanvas
+		cd Kanvas
+		python3 -m venv venv
+		source venv/bin/activate
+		pip3 install -r requirements.txt
+
+		# Add shortcut command to start kanvas
+		echo "alias kanvas='cd Kanvas; source venv/bin/activate; python3 kanvas.py'" >> ${MYUSERDIR}/.bashrc
+	fi
+}
+
+RemoveKanvasIR() {
+	rm -rf ${MYUSERDIR}/Kanvas
+	sed -i 's/^alias kanvas/#alias kanvas/g' ${MYUSERDIR}/.bashrc
+}
+
 
 #################################
 ### Reverse Engineering tools ###

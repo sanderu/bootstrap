@@ -26,7 +26,6 @@ InstallImHex                    #RemoveImHex
 
 ### Forensic tools ###
 #InstallForensicImageTools      #RemoveForensicImageTools
-#InstallFTKImager               #RemoveFTKImager
 #InstallImagingTools            #RemoveImagingTools
 #InstallExifTool                #RemoveExifTool
 #InstallRecoverTools            #RemoveRecoverTools
@@ -39,6 +38,7 @@ InstallImHex                    #RemoveImHex
 #InstallUAC                     #RemoveUAC
 #InstallRegistrySpy             #RemoveRegistrySpy
 #InstallAuroraIR                #RemoveAuroraIR
+#InstallKanvasIR				#RemoveKanvasIR
 
 ### Reverse Engineering ###
 #InstallGhidra                  #RemoveGhidra
