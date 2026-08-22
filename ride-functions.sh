@@ -459,7 +459,7 @@ InstallAuroraIR() {
     chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/imhex.AppImage
 }
 
-RemoteAuroraIR() {
+RemoveAuroraIR() {
     rm ${MYUSERDIR}/bin/aurora
     rf -rf ${MYUSERDIR}/bin/Aurora-linux-x64
 }
