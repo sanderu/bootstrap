@@ -521,36 +521,16 @@ RemoveGhidra() {
 }
 
 InstallCutter() {
-    # Installing prerequisites
-    apt install -y build-essential cmake meson pkg-config libzip-dev zlib1g-dev libqt5svg5-dev qttools5-dev qttools5-dev-tools libkf5syntaxhighlighting-dev libgraphviz-dev wget
-    # when building with CUTTER_ENABLE_PYTHON_BINDINGS - this however, continuously failed for me so I'm excluding it
-    # apt install -y libshiboken2-dev libpyside2-dev  qtdeclarative5-dev
-    # for Python bindings: cmake -DCUTTER_ENABLE_PYTHON=TRUE -DCUTTER_ENABLE_PYTHON_BINDINGS=/usr/bin/python -DCUTTER_ENABLE_GRAPHVIZ=TRUE -DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=TRUE ..
-
     # Get latest cutter version
     wget https://github.com/rizinorg/cutter/releases/latest -O /tmp/cutter.html
-    LATEST_VERS=$( grep Release /tmp/cutter.html | awk -F '<title>Release ' '{print $2}'  | awk -F ' · rizinorg/cutter' '{print $1}' | grep -v ^$ )
-    wget https://github.com/rizinorg/cutter/releases/download/v${LATEST_VERS}/Cutter-v${LATEST_VERS}-src.tar.gz -O ${DOWNLOADDIR}/cutter.tar.gz
-
-    cd ${DOWNLOADDIR}
-    tar -xzvf cutter.tar.gz
-
-    # Build from source
-    cd ${DOWNLOADDIR}/Cutter-v${LATEST_VERS}
-    mkdir build
-    cd build/
-    cmake -DCUTTER_ENABLE_GRAPHVIZ=TRUE -DCUTTER_ENABLE_KSYNTAXHIGHLIGHTING=TRUE ..
-    cmake --build .
-    cmake --install .
+    LATEST_VERS=$( grep opengraph /tmp/cutter.html  | awk -F 'tag/v' '{print $2}' | cut -f1 -d '"' | head -n1 )
+    wget https://github.com/rizinorg/cutter/releases/download/v${LATEST_VERS}/Cutter-v${LATEST_VERS}-Linux-x86_64.AppImage -O ${MYUSERDIR}/bin/cutter.AppImage
+    chmod +x ${MYUSERDIR}/bin/cutter.AppImage
+    chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/cutter.AppImage
 }
 
 RemoveCutter() {
-    if [ -f /usr/local/bin/cutter]; then
-        rm /usr/local/bin/cutter
-    fi
-    if [ -d /usr/local/lib ]; then
-        rm -f /usr/local/lib/librz_*
-    fi
+	rm ${MYUSERDIR}/bin/cutter.AppImage
 }
 
 InstallMalcat() {
