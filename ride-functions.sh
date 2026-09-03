@@ -455,8 +455,6 @@ InstallAuroraIR() {
     cd ${MYUSERDIR}/bin
     unzip ${DOWNLOADDIR}/aurora.zip
     ln -s Aurora-linux-x64/Aurora aurora
-    chmod +x ${MYUSERDIR}/bin/imhex.AppImage
-    chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/imhex.AppImage
 }
 
 RemoveAuroraIR() {
@@ -673,6 +671,19 @@ RemoveFLOSS() {
         rm ${MYUSERDIR}/bin/floss
     fi
 }
+
+InstallDIE() {
+    wget https://github.com/horsicq/DIE-engine/releases/latest -O /tmp/DIE.html
+    LATEST_VERS=$( grep opengraph /tmp/DIE.html  | awk -F 'tag/' '{print $2}' | cut -f1 -d '"' | head -n1 )
+    wget https://github.com/horsicq/DIE-engine/releases/download/${LATEST_VERS}/Detect_It_Easy-${LATEST_VERS}-x86_64.AppImage -O ${MYUSERDIR}/bin/die.AppImage
+    chmod +x ${MYUSERDIR}/bin/die.AppImage
+    chown ${MYUSER}:${MYUSER} ${MYUSERDIR}/bin/die.AppImage
+}
+
+RemoveDIE() {
+    rm ${MYUSERDIR}/bin/die.AppImage
+}
+
 
 ###########################
 ### CTF / Pentest tools ###

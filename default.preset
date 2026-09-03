@@ -49,6 +49,7 @@ InstallImHex                    #RemoveImHex
 #InstallEDBDebugger             #RemoveEDBDebugger
 #InstallCapa                    #RemoveCapa
 #InstallFLOSS                   #RemoveFLOSS
+#InstallDIE						#RemoveDIE
 
 ### CTF / Pentest tools ###
 #InstallBurp                     #RemoveBurp
